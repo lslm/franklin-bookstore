@@ -1,0 +1,27 @@
+<%= form_with(model: price_group, local: true) do |form| %>
+  <% if price_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(price_group.errors.count, "error") %> prohibited this price_group from being saved:</h2>
+
+      <ul>
+      <% price_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :prefix %>
+    <%= form.text_field :prefix %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
