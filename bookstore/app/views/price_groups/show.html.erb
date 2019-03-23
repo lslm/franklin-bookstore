@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prefix:</strong>
+  <%= @price_group.prefix %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @price_group.description %>
+</p>
+
+<%= link_to 'Edit', edit_price_group_path(@price_group) %> |
+<%= link_to 'Back', price_groups_path %>
