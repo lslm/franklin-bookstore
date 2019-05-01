@@ -28,8 +28,8 @@
               Produtos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Admin::Category.all.each do |category| %>
-                <%= link_to category.name, admin_products_path(category: category.name), class: 'dropdown-item' %>
+              <% Category.all.each do |category| %>
+                <%= link_to category.name, products_path(category: category.name), class: 'dropdown-item' %>
               <% end %>
             </div>
           </li>
@@ -43,9 +43,9 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if user_signed_in? %>
                 <% if current_user.admin %>
-                  <%= link_to "Gerenciar produtos", admin_products_path, class: 'dropdown-item' %>
-                  <%= link_to "Gerenciar categorias", admin_categories_path, class: 'dropdown-item' %>
-                  <%= link_to "Pedidos", admin_checkouts_path, class: 'dropdown-item' %>
+                  <%= link_to "Gerenciar produtos", products_path, class: 'dropdown-item' %>
+                  <%= link_to "Gerenciar categorias", categories_path, class: 'dropdown-item' %>
+                  <%= link_to "Pedidos", checkouts_path, class: 'dropdown-item' %>
                 <% else %>
                   <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
                 <% end %>

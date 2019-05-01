@@ -10,7 +10,7 @@
     </tr>
     <% @checkouts.each do |checkout| %>
       <tr>
-        <td><%= link_to checkout.slug, admin_checkout_path(checkout.id) %></td>
+        <td><%= link_to checkout.slug, checkout_path(checkout.id) %></td>
         <td><%= checkout.user.first_name %> <%= checkout.user.last_name %></td>
         <td><%= checkout.created_at %></td>
         <td><%= checkout.status %></td>

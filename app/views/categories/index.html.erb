@@ -4,7 +4,7 @@
     <div class="grid">
       <% @categories.each do |category| %>
         <div class="grid-item">
-          <%= link_to image_tag(category.image.url), admin_products_path(category: category.name) %>
+          <%= link_to image_tag(category.image.url), products_path(category: category.name) %>
           <span class="grid-caption"><%= category.name %></span>
         </div>
       <% end %>
@@ -12,5 +12,5 @@
   </div>
   
   <br><br>
-  <%= link_to "New Category", new_admin_category_path, class: "custom-button" %>
+  <%= link_to "New Category", new_category_path, class: "custom-button" %>
 </div>

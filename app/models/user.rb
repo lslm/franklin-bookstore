@@ -5,8 +5,8 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :products, class_name: 'Admin::Product'
-  has_many :categories, class_name: 'Admin::Category'
+  has_many :products
+  has_many :categories
   has_many :orders
   has_many :banners
   has_many :checkouts

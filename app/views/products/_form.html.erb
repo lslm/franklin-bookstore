@@ -1,13 +1,23 @@
-  <%= simple_form_for @product, :html => { multipart: true, id: "new-product-form" }, validate: true do |f| %>
+<div class="center">
+  <%= simple_form_for @product, :html => { multipart: true }, validate: true do |f| %>
     <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Select A Category" } %>
-    <br><br>
+    <br>
     <%= f.input :name %>
     <%= f.input :description %>
     <%= f.input :price %>
     <%= f.input :on_sale %>
     <%= f.input :sold_out %>
     <%= f.input :featured %>
-    <br>
+    <%= f.input :author %>
+    <%= f.input :year %>
+    <%= f.input :publisher %>
+    <%= f.input :edition %>
+    <%= f.input :isbn %>
+    <%= f.input :pages %>
+    <%= f.input :dimensions %>
+    <%= f.input :barcode %>
+    <%= f.input :active %>
+    <%= f.input :activation_reason %>
     <%= f.input :quantity %>
 
     <%= f.label :pictures %>
@@ -35,5 +45,7 @@
       <% end %>
     </div>
 
-    <%= f.submit %>
+    <%= f.submit 'Salvar' %>
   <% end %>
+
+</div>

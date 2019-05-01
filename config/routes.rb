@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     collection { post :sort }
   end
 
-  namespace :admin do
+  scope :admin do
     resources :checkouts
     resources :products
     resources :categories

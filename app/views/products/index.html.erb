@@ -1,27 +1,29 @@
-<div class="products text-center">
-	<h1 class="grid-title full-width"><%= @category ? @category.name : "All Products" %></h1>
+<div class="center">
+  <h1>Products</h1>
 
-	<li class="product-sort"><a href="javascript:void(0)">Sort</a>
-    <ul class="dropdown-content">
-    	<% cat_name = @category ? @category.name : "" %>
-      <li><%= link_to "Date: New - Old", :sort => "created_at DESC", :category => cat_name %></li>
-			<li><%= link_to "Date: Old - New", :sort => "created_at ASC", :category => cat_name %></li>
-			<li><%= link_to "Price: High - Low", :sort => "price DESC", :category => cat_name %></li>
-			<li><%= link_to "Price: Low - High", :sort => "price ASC", :category => cat_name %></li>
-			<li><%= link_to "Name: A-Z", :sort => "name", :category => cat_name %></li>
-			<li><%= link_to "Name: Z-A", :sort => "name DESC", :category => cat_name %></li>
-    </ul>
-  </li>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Título</th>
+        <th scope="col">Author</th>
+        <th scope="col">Year</th>
+        <th scope="col">Creation date</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= link_to product.id, edit_product_path(product.id) %></td>
+          <td><%= product.name %></td>
+          <td><%= product.author %></td>
+          <td><%= product.year %></td>
+          <td><%= product.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-	<div class="grid">
-		<% @product.each do |product| %>
-			<div class="grid-item">
-				<% product.pictures.limit(1).each do |picture| %>
-					<%= link_to image_tag(picture.image.url(:grid)), product, 'data-turbolinks' => false %>
-				<% end %>
-				<span>View</span>
-				<p class="grid-caption"><%= product.name %> - $<%= number_with_precision(product.price, :precision => 2)%></p>
-			</div>
-		<% end %>
-	</div>
+  <%= link_to "New product", new_product_path, class: "custom-button" %>
 </div>

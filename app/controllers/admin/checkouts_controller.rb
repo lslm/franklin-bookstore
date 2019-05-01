@@ -15,7 +15,7 @@ class Admin::CheckoutsController < ApplicationController
 
 		@checkout.update(checkout_params)
 
-		redirect_to admin_checkouts_path
+		redirect_to checkouts_path
   end
 
 	private
