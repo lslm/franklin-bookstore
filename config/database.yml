@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  database: ecommerce_development
+  pool: 5
+  timeout: 5000
+  username: <%= Rails.configuration.default['POSTGRESQL_USERNAME'] %>
+  password: <%= Rails.configuration.default['POSTGRESQL_PASSWORD'] %>
+
+test:
+  adapter: postgresql
+  database: ecommerce_test
+  pool: 5
+  timeout: 5000
+  username: <%= Rails.configuration.default['POSTGRESQL_USERNAME'] %>
+  password: <%= Rails.configuration.default['POSTGRESQL_PASSWORD'] %>
+
+production:
+  adapter: postgresql
+  database: ecommerce_production
+  pool: 5
+  timeout: 5000
+  # Username and password should be fetched from production environment
+  # Otherwise, copy the username and password as above and add to default.yaml

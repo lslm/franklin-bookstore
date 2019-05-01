@@ -1,0 +1,31 @@
+<div class="cart-row">
+  <%= link_to image_tag("remove.png", class: "remove-item", title: "Remove item"), order_item, { data: { confirm: "Are you sure you wish to delete the product '#{order_item.product.name}' from your cart?" }, method: :delete, remote: true } %>
+  <div class="content">
+    <div class="product-image">
+      <% product.pictures.limit(1).each do |picture| %>
+        <%= link_to image_tag(picture.image.url(:grid)), product, 'data-turbolinks' => false %>
+      <% end %>
+    </div>
+  
+    <div class="cart-product-details">
+      <h3><%= product.name %></h3>
+      <p><%= order_item.quantity %> x <%= number_to_currency order_item.unit_price %></p>
+    </div>
+
+    <div class="form">
+      <%= form_for order_item, remote: true, :html => { id: "update-quantity-form" } do |f| %>
+        <div class="right">
+
+          <%= f.select :quantity, (1..product.quantity), {}, value: order_item.quantity.to_i, class: "quantity-input" %>
+          <div class="order-item-total">
+            <%= number_to_currency order_item.total_price %>
+          </div>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <div class="update-quantity">
+            <%= link_to "Update Quantity", "", :onclick => "$('#update-quantity-form').submit()", class: "custom-button text-sm" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

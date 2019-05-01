@@ -1,0 +1,23 @@
+# Ignore bundler config.
+/.bundle
+/vendor/bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+/public/system
+/public/system/*
+/public/pictures
+/public/pictures/*
+/public/assets
+/public/assets/*
+.DS_Store
+
+# Ignore seed images, can provide own
+/db/seed/images

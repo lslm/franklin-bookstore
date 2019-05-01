@@ -1,0 +1,19 @@
+<div class="center">
+  <h1>Listing orders</h1>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+    <% @checkouts.each do |checkout| %>
+      <tr>
+        <td><%= link_to checkout.slug, checkout_path(checkout) %></td>
+        <td><%= checkout.user.first_name %> <%= checkout.user.last_name %></td>
+        <td><%= checkout.created_at %></td>
+        <td><%= checkout.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

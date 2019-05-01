@@ -1,0 +1,66 @@
+<div class="center">
+  <h1>Order Confirmation #<%= @checkout.slug %></h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h3>
+  
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit price</th>
+          <th>Total</th>
+        </tr>
+        <% @checkout.order.order_items.each do |item| %>
+          <tr>
+            <td><%= item.product.name %></td>
+            <td><%= item.quantity %></td>
+            <td><%= number_to_currency(item.unit_price) %></td>
+            <td><%= number_to_currency(item.total_price) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  
+    <div class="col-md-6">
+      <div>
+        <h3>Client</h3>
+        <p>ID: <%= @checkout.user_id %></p>
+        <p>Name: <%= @checkout.first_name %> <%= @checkout.last_name %> </p>
+      </div>
+    
+      <div>
+        <h3>Shipping address</h3>
+        <p>Shipping address: <%= @checkout.shipping_address %></p>
+        <p>Shipping suburb: <%= @checkout.shipping_suburb %></p>
+        <p>Shipping ZIP code: <%= @checkout.shipping_zip %></p>
+        <p>Shipping State: <%= @checkout.shipping_state %></p>
+      </div>
+    
+      <div>
+        <h3>Billing address</h3>
+        <p>Billing address: <%= @checkout.billing_address %></p>
+        <p>Billing suburb: <%= @checkout.billing_suburb %></p>
+        <p>Billing ZIP code: <%= @checkout.billing_zip %></p>
+        <p>Billing State: <%= @checkout.billing_state %></p>
+      </div>
+    
+      <div>
+        <h3>Payment</h3>
+        <p>Credit card number: <%= @checkout.credit_card_number %></p>
+        <p>Credit card name: <%= @checkout.credit_card_name %></p>
+        <p>Credit card expire date: <%= @checkout.credit_card_expire_date %></p>
+        <p>Credit card CCV: <%= @checkout.credit_card_ccv %></p>
+      </div>
+    
+      <h1>Update status</h1>
+      
+      <%= simple_form_for @checkout, url: admin_checkout_path, method: :patch do |f| %>
+        <%= f.select :status, [['Aguardando confirmação', 'waiting_for_confirmation'], ['Confirmado', 'confirmed'], ['Em trânsito', 'in_transit'], ['Entrege', 'delivered']] %>
+        <%= f.submit 'Update status' %>
+      <% end %>
+    </div>
+  </div>
+  
+</div>

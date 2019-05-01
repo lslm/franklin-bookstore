@@ -1,0 +1,24 @@
+<div class="center">
+  <h1>Order Confirmation #<%= @checkout.slug %></h1>
+
+  <h3>Status: <%= @checkout.status %></h3>
+
+  <h3>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h3>
+
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
+      <th>Total</th>
+    </tr>
+    <% @checkout.order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.unit_price) %></td>
+        <td><%= number_to_currency(item.total_price) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
