@@ -69,9 +69,11 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
 
   create_table "items", force: :cascade do |t|
     t.bigint "stock_id"
+    t.bigint "product_id"
     t.boolean "sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_items_on_product_id"
     t.index ["stock_id"], name: "index_items_on_stock_id"
   end
 
@@ -218,6 +220,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "items", "products"
   add_foreign_key "items", "stocks"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
