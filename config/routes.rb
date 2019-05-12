@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :checkouts
     resources :products
     resources :categories
+    resources :stocks
   end
 
   get 'all-banners', to: 'banners#display'

@@ -1,0 +1,14 @@
+<%= simple_form_for(@stock) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.collection_select :product_id, Product.all, :id, :name, { prompt: "Selecione um produto" } %>
+    <%= f.input :quantity %>
+    <%= f.input :price %>
+    <%= f.input :lot %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
