@@ -6,20 +6,23 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Título</th>
-        <th scope="col">Author</th>
-        <th scope="col">Year</th>
-        <th scope="col">Creation date</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Ano</th>
+        <th scope="col">Data de cadastro</th>
+        <th scope="col" colspan="2">Ação</th>
       </tr>
     </thead>
     
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to product.id, edit_product_path(product.id) %></td>
+          <td><%= link_to product.id, product_path(product) %></td>
           <td><%= product.name %></td>
           <td><%= product.author %></td>
           <td><%= product.year %></td>
           <td><%= product.created_at %></td>
+          <td><%= link_to 'Editar', edit_product_path(product.id) %></td>
+          <td><%= button_to 'Apagar', product, method: :delete, class: 'btn btn-danger btn-responsive', data: {confirm: 'Tem certeza?'} %></td>
         </tr>
       <% end %>
     </tbody>

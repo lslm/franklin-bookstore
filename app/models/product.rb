@@ -12,7 +12,6 @@ class Product < ApplicationRecord
   validates :name, presence: true, length: { in: 2..75 }
   validates :description, presence: true, length: { in: 10..2000 }
   validates :price, presence: true
-  validates :quantity, presence: true, :inclusion => 1..999
   validates :category_id, presence: true
   validates :user_id, presence: true
 
