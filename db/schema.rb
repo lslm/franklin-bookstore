@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_205218) do
+ActiveRecord::Schema.define(version: 2019_05_12_225052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,11 @@ ActiveRecord::Schema.define(version: 2019_05_09_205218) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.bigint "product_id"
-    t.decimal "price"
+    t.bigint "stock_id"
     t.boolean "sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_items_on_product_id"
+    t.index ["stock_id"], name: "index_items_on_stock_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -161,6 +160,16 @@ ActiveRecord::Schema.define(version: 2019_05_09_205218) do
     t.string "activation_reason"
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.decimal "price"
+    t.string "lot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_stocks_on_product_id"
+  end
+
   create_table "uploads", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -209,8 +218,9 @@ ActiveRecord::Schema.define(version: 2019_05_09_205218) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "items", "products"
+  add_foreign_key "items", "stocks"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "order_statuses"
+  add_foreign_key "stocks", "products"
 end
