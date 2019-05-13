@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_023838) do
+ActiveRecord::Schema.define(version: 2019_05_13_115938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2019_05_13_023838) do
     t.string "credit_card_expire_date"
     t.string "credit_card_ccv"
     t.index ["slug"], name: "index_checkouts_on_slug", unique: true
+  end
+
+  create_table "coupoms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "code"
+    t.decimal "value"
+    t.boolean "used"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_coupoms_on_user_id"
   end
 
   create_table "feature_toggles", force: :cascade do |t|
