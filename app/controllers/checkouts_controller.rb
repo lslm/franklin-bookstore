@@ -33,6 +33,8 @@ class CheckoutsController < ApplicationController
       @checkout.set_gst(@order.subtotal, @order.gst)
       @checkout.order_id = @order.id
 
+      @order.shipment_cost = @order.subtotal * 0.05
+
       @order.save!
 
       if current_user
@@ -70,7 +72,6 @@ class CheckoutsController < ApplicationController
 
   def update_stock
     @order.order_items.each do |order_item|
-      binding.pry
       item_stock = order_item.stock
 
       item_stock.update(quantity: item_stock.quantity - order_item.quantity)

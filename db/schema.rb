@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_151941) do
+ActiveRecord::Schema.define(version: 2019_05_13_164322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_151941) do
     t.decimal "subtotal", precision: 8, scale: 2
     t.string "coupom_code"
     t.bigint "checkout_id"
+    t.decimal "shipment_cost"
     t.index ["checkout_id"], name: "index_orders_on_checkout_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end

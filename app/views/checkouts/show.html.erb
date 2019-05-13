@@ -3,7 +3,8 @@
 
   <h3>Status: <%= @checkout.status %></h3>
 
-  <h3>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h3>
+  <h5>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h5>
+  <h5>Custo de envio <%= number_to_currency(@checkout.order.shipment_cost) %></h5>
 
   <table>
     <tr>
