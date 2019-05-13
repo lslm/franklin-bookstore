@@ -10,7 +10,7 @@ class ReturnsController < ApplicationController
   def new
     @return = Return.new
 
-    @item = Item.find(params[:item_id])
+    @stock = Stock.find(params[:stock_id])
     @quantity_available = params[:quantity]
   end
 
@@ -18,7 +18,7 @@ class ReturnsController < ApplicationController
     @return = Return.new(return_params)
 
     @return.user = current_user
-    @return.item_id = return_params[:item_id]
+    @return.stock_id = return_params[:stock_id]
     @return.status = 'pending'
 
     respond_to do |format|
@@ -33,6 +33,6 @@ class ReturnsController < ApplicationController
   private
 
   def return_params
-    params.require(:return).permit(:return_reason, :item_id, :quantity)
+    params.require(:return).permit(:return_reason, :stock_id, :quantity)
   end
 end

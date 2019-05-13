@@ -15,12 +15,12 @@
     </tr>
     <% @checkout.order.order_items.each do |order_item| %>
       <tr>
-        <td><%= order_item.item.product.name %></td>
+        <td><%= order_item.stock.product.name %></td>
         <td><%= order_item.quantity %></td>
         <td><%= number_to_currency(order_item.unit_price) %></td>
         <td><%= number_to_currency(order_item.total_price) %></td>
         <td>
-          <%= link_to 'Solicitar troca', new_return_path(item_id: order_item.item_id, quantity: order_item.quantity) %>
+          <%= link_to 'Solicitar troca', new_return_path(stock_id: order_item.stock_id, quantity: order_item.quantity) %>
         </td>
       </tr>
     <% end %>

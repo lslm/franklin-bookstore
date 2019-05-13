@@ -4,7 +4,8 @@ class ShopItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    binding.pry
+    @item_stock = Stock.find(params[:id])
 
     @order_item = current_order.order_items.new
   end

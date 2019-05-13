@@ -12,7 +12,7 @@ class CheckoutsController < ApplicationController
     @order = Order.find_by_id(@checkout.order_id)
     @order_items = Order.find_by_id(@order.id).order_items
     @order_items.each do |order_item|
-      @products = Product.where(id: order_item.item.product_id)
+      @products = Product.where(id: order_item.stock.product_id)
     end
   end
 
@@ -28,7 +28,7 @@ class CheckoutsController < ApplicationController
     @coupom = Coupom.find_by_code(params[:coupom_code])
 
     if @order.present?
-      @order.coupom_code = @coupom.code
+      @order.coupom_code = @coupom.code if @coupom
 
       @checkout.set_gst(@order.subtotal, @order.gst)
       @checkout.order_id = @order.id
@@ -70,14 +70,10 @@ class CheckoutsController < ApplicationController
 
   def update_stock
     @order.order_items.each do |order_item|
-      item = order_item.item
+      binding.pry
+      item_stock = order_item.stock
 
-      item.update(sold: true)
-      items_to_be_sold = Item.where(product_id: item.product_id, sold: false).limit(order_item.quantity - 1)
-
-      items_to_be_sold.each do |item|
-        item.update(sold: true)
-      end
+      item_stock.update(quantity: item_stock.quantity - order_item.quantity)
     end
   end
 

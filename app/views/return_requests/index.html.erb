@@ -19,8 +19,8 @@
         <tr>
           <td><%= return_request.created_at%></td>
           <td><%= return_request.user.first_name%></td>
-          <td><%= return_request.item.product.name %></td>
-          <td><%= return_request.item.stock.price %></td>
+          <td><%= return_request.stock.product.name %></td>
+          <td><%= return_request.stock.price %></td>
           <td><%= return_request.quantity %></td>
           <td><%= return_request.status %></td>
           <td><%= link_to 'Visualizar', return_request_path(return_request) %></td>

@@ -31,15 +31,15 @@
     <tbody>
       <% @order_items.each do |order_item| %>
         <tr>
-          <td><%= order_item.item.product.name %></td>
+          <td><%= order_item.stock.product.name %></td>
           <td><%= order_item.quantity %></td>
-          <td><%= order_item.item.stock.price %></td>
-          <td><%= order_item.quantity * order_item.item.stock.price %></td>
+          <td><%= order_item.stock.price %></td>
+          <td><%= order_item.quantity * order_item.stock.price %></td>
           <td>
             <%= form_for order_item, remote: true do |f| %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= f.hidden_field :item_id, value: order_item.item.product.id %>
-              <%= f.select :quantity, (1..order_item.item.available_quantity), {}, value: order_item.quantity.to_i %>
+              <%= f.hidden_field :item_id, value: order_item.stock.product.id %>
+              <%= f.select :quantity, (1..order_item.stock.quantity), {}, value: order_item.quantity.to_i %>
               <%= button_to "Atualizar quantidade", method: :patch %>
             <% end %>
           </td>

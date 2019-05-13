@@ -1,5 +1,5 @@
   <%= simple_form_for @return, :html => { multipart: true } do |f| %>
-    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.hidden_field :stock_id, value: @stock.id %>
 
     <%= f.input :return_reason %>
     <%= f.select :quantity, (1..@quantity_available.to_i) %>

@@ -13,6 +13,7 @@ class ReturnRequestsController < ApplicationController
     return_request.update(return_request_params)
 
     create_coupom_for_user(return_request)
+    enter_product_to_stock(return_request)
 
     redirect_to return_requests_path
   end
@@ -20,11 +21,16 @@ class ReturnRequestsController < ApplicationController
   private
 
   def create_coupom_for_user(return_request)
-    coupom_value = return_request.item.stock.price * return_request.quantity
+    coupom_value = return_request.stock.price * return_request.quantity
     user = return_request.user
     code = rand(36**6).to_s(36)
 
     Coupom.create!(user: user, code: code, value: coupom_value, used: false)
+  end
+
+  def enter_product_to_stock(return_request)
+    item_stock = return_request.stock
+    item_stock.update(quantity: item_stock.quantity + return_request.quantity)
   end
 
   def return_request_params

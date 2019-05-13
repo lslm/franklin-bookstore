@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_151941) do
   end
 
   create_table "order_items", id: :serial, force: :cascade do |t|
-    t.integer "item_id"
+    t.integer "stock_id"
     t.integer "order_id"
     t.decimal "unit_price", precision: 12, scale: 3
     t.integer "quantity"
@@ -177,13 +177,13 @@ ActiveRecord::Schema.define(version: 2019_05_13_151941) do
 
   create_table "returns", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "item_id"
+    t.bigint "stock_id"
     t.string "return_reason"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "quantity"
-    t.index ["item_id"], name: "index_returns_on_item_id"
+    t.index ["stock_id"], name: "index_returns_on_stock_id"
     t.index ["user_id"], name: "index_returns_on_user_id"
   end
 
@@ -247,11 +247,11 @@ ActiveRecord::Schema.define(version: 2019_05_13_151941) do
 
   add_foreign_key "items", "products"
   add_foreign_key "items", "stocks"
-  add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "stocks"
   add_foreign_key "orders", "checkouts"
   add_foreign_key "orders", "order_statuses"
-  add_foreign_key "returns", "items"
+  add_foreign_key "returns", "stocks"
   add_foreign_key "returns", "users"
   add_foreign_key "stocks", "products"
 end
