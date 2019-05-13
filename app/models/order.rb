@@ -12,7 +12,11 @@ class Order < ApplicationRecord
   # validates :gst, presence: true
 
   def subtotal
-    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    coupom = Coupom.find_by_code(self[:coupom_code])
+    total = order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    total = total - coupom.value if coupom
+
+    total
   end
 
   private
@@ -22,7 +26,8 @@ class Order < ApplicationRecord
   end
 
   def update_subtotal
-    self[:subtotal] = subtotal
+    coupom = Coupom.find_by_code(self[:coupom_code])
+    self[:subtotal] = subtotal - coupom.value if coupom
   end
 
   def set_gst

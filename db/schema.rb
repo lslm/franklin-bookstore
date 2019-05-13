@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_115938) do
+ActiveRecord::Schema.define(version: 2019_05_13_141817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_115938) do
     t.string "credit_card_name"
     t.string "credit_card_expire_date"
     t.string "credit_card_ccv"
+    t.string "coupom_code"
     t.index ["slug"], name: "index_checkouts_on_slug", unique: true
   end
 
@@ -112,6 +113,9 @@ ActiveRecord::Schema.define(version: 2019_05_13_115938) do
     t.datetime "updated_at", null: false
     t.integer "order_status_id"
     t.decimal "subtotal", precision: 8, scale: 2
+    t.string "coupom_code"
+    t.bigint "checkout_id"
+    t.index ["checkout_id"], name: "index_orders_on_checkout_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
@@ -244,6 +248,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_115938) do
   add_foreign_key "items", "stocks"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "checkouts"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "returns", "items"
   add_foreign_key "returns", "users"

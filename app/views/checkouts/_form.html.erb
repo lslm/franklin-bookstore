@@ -1,8 +1,26 @@
 <div class="checkout">
+  <h2>Subtotal: <%= @order.subtotal %></h2>
+  <% if @coupom %>
+    <h3>Valor de desconto: <%= @coupom.value %></h3>
+  <% end %>
+
+  <%= form_tag("/checkouts/new", method: "get") do %>
+    <%= hidden_field_tag :order_id, @order.id %>
+    <%= label_tag(:coupom_code, "Código do cupom") %>
+    <%= text_field_tag(:coupom_code) %>
+    <%= submit_tag("Aplicar cupom") %>
+  <% end %>
+
   <%= simple_form_for @checkout, :html => { :multipart => true, :id => "checkout-form" }, validate: true do |f| %>
     <%= hidden_field_tag(:order_id, @order.id) %>
+
+    <% if @coupom %>
+      <%= hidden_field_tag(:coupom_code, @coupom.code) %>
+    <% end %>
     <!-- Stripe server errors -->
     <%= f.error :base %>
+
+    <hr>
 
     <div class="checkout-section checkout-personal">
       <h2>Personal Details</h2>

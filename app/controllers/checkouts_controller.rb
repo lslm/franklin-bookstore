@@ -1,6 +1,7 @@
 class CheckoutsController < ApplicationController
   before_action :find_checkout, only: [:show]
   before_action :find_order, only: [:new, :create]
+  skip_before_action :verify_authenticity_token
 
   def index
     @checkouts = current_user.checkouts
@@ -8,7 +9,6 @@ class CheckoutsController < ApplicationController
 
   def show
     @checkout = Checkout.find_by_slug(params[:slug])
-    
     @order = Order.find_by_id(@checkout.order_id)
     @order_items = Order.find_by_id(@order.id).order_items
     @order_items.each do |order_item|
@@ -18,15 +18,22 @@ class CheckoutsController < ApplicationController
 
   def new
     @checkout = Checkout.new
+    @order = Order.find(params[:order_id])
+    @coupom = Coupom.find_by_code(params[:coupom_code])
   end
 
   def create
     @checkout = Checkout.new(checkouts_params)
     @checkout.status = 'waiting_confirmation'
+    @coupom = Coupom.find_by_code(params[:coupom_code])
 
     if @order.present?
+      @order.coupom_code = @coupom.code
+
       @checkout.set_gst(@order.subtotal, @order.gst)
       @checkout.order_id = @order.id
+
+      @order.save!
 
       if current_user
         @checkout.user_id = current_user.id
@@ -52,8 +59,11 @@ class CheckoutsController < ApplicationController
           format.html { render :new }
         end
       end
-      
     end
+  end
+
+  def update
+    coupom = Coupom.find_by_code(checkouts_params[:coupom_code])
   end
 
   private
@@ -63,7 +73,6 @@ class CheckoutsController < ApplicationController
       item = order_item.item
 
       item.update(sold: true)
-      binding.pry
       items_to_be_sold = Item.where(product_id: item.product_id, sold: false).limit(order_item.quantity - 1)
 
       items_to_be_sold.each do |item|
@@ -76,7 +85,8 @@ class CheckoutsController < ApplicationController
     params.require(:checkout).permit(
       :total, :first_name, :last_name, :email, :shipping_address, :shipping_suburb, :shipping_zip, :shipping_state,
       :billing_address, :billing_suburb, :billing_zip, :billing_state, :phone, :order_id, :user_id,
-      :credit_card_number, :credit_card_name, :credit_card_expire_date, :credit_card_ccv
+      :credit_card_number, :credit_card_name, :credit_card_expire_date, :credit_card_ccv,
+      :coupom_code
     )
   end
 
