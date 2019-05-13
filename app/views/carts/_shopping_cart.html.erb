@@ -16,12 +16,41 @@
   <div class="cart">
     <h2>Shopping Cart</h2>
     <p>You have <b><%= current_order.order_items.size > 1 ? current_order.order_items.size.to_s + " items" : current_order.order_items.size.to_s + " item" %></b> in your shopping cart</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Produto</th>
+        <th scope="col">Quantidade</th>
+        <th scope="col">Preço unitário</th>
+        <th scope="col">Preço total</th>
+        <th scope="col" colspan="2">Ação</th>
+      </tr>
+    </thead>
     
-    <div class="cart-row-border">
+    <tbody>
       <% @order_items.each do |order_item| %>
-        <%= render 'carts/cart_row', product: order_item.product, order_item: order_item, show_total: true %>
+        <tr>
+          <td><%= order_item.item.product.name %></td>
+          <td><%= order_item.quantity %></td>
+          <td><%= order_item.item.stock.price %></td>
+          <td><%= order_item.quantity * order_item.item.stock.price %></td>
+          <td>
+            <%= form_for order_item, remote: true do |f| %>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <%= f.hidden_field :item_id, value: order_item.item.product.id %>
+              <%= f.select :quantity, (1..order_item.item.available_quantity), {}, value: order_item.quantity.to_i %>
+              <%= button_to "Atualizar quantidade", method: :patch %>
+            <% end %>
+          </td>
+          <td>
+            <%= button_to 'Remover do carrinho', order_item, method: :delete, class: 'btn btn-danger btn-responsive', data: {confirm: 'Tem certeza?'} %>
+          </td>
+        </tr>
       <% end %>
-    </div>
+    </tbody>
+  </table>
+    
 
     <div class="cart-finish">
       <h3 class="cart-total">Total: <%= number_to_currency @order.subtotal %></h3>

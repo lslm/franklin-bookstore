@@ -15,9 +15,6 @@ class Checkout < ApplicationRecord
   validates :shipping_zip, :billing_zip, presence: true, :allow_blank => true 
   validates :shipping_state, :billing_state, presence: true, length: { in: 2..3 }, :allow_blank => true 
 
-  # Set the stripe secret key
-  Stripe.api_key = Rails.configuration.default['STRIPE_API_KEY']
-
   def to_param
     slug
   end

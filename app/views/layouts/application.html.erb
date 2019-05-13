@@ -15,7 +15,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-4">
-      <a class="navbar-brand" href="#">BookStore</a>
+      <%= link_to "BookStore", root_path, class: 'navbar-brand' %>
       
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,8 @@
                 <% if current_user.admin %>
                   <%= link_to "Gerenciar produtos", products_path, class: 'dropdown-item' %>
                   <%= link_to "Gerenciar categorias", categories_path, class: 'dropdown-item' %>
-                  <%= link_to "Pedidos", checkouts_path, class: 'dropdown-item' %>
+                  <%= link_to "Estoque", stocks_path, class: 'dropdown-item' %>
+                  <%= link_to "Pedidos", orders_path, class: 'dropdown-item' %>
                 <% else %>
                   <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
                 <% end %>

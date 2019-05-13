@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create]
   resource :cart, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
-  resources :orders, except: [:edit, :update, :destroy]
-  resources :checkouts, except: [:edit, :update, :destroy], param: :slug
+  resources :checkouts, param: :slug
   resources :shop_items
   
   resources :pages, param: :slug do 
@@ -17,10 +16,10 @@ Rails.application.routes.draw do
   end
 
   scope :admin do
-    resources :checkouts
     resources :products
     resources :categories
     resources :stocks
+    resources :orders
   end
 
   get 'all-banners', to: 'banners#display'

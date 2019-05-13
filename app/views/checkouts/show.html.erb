@@ -12,12 +12,12 @@
       <th>Unit price</th>
       <th>Total</th>
     </tr>
-    <% @checkout.order.order_items.each do |item| %>
+    <% @checkout.order.order_items.each do |order_item| %>
       <tr>
-        <td><%= item.product.name %></td>
-        <td><%= item.quantity %></td>
-        <td><%= number_to_currency(item.unit_price) %></td>
-        <td><%= number_to_currency(item.total_price) %></td>
+        <td><%= order_item.item.product.name %></td>
+        <td><%= order_item  .quantity %></td>
+        <td><%= number_to_currency(order_item.unit_price) %></td>
+        <td><%= number_to_currency(order_item.total_price) %></td>
       </tr>
     <% end %>
   </table>

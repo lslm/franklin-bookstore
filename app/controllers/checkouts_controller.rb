@@ -12,7 +12,7 @@ class CheckoutsController < ApplicationController
     @order = Order.find_by_id(@checkout.order_id)
     @order_items = Order.find_by_id(@order.id).order_items
     @order_items.each do |order_item|
-      @products = Product.where(id: order_item.product_id)
+      @products = Product.where(id: order_item.item.product_id)
     end
   end
 
@@ -32,21 +32,25 @@ class CheckoutsController < ApplicationController
         @checkout.user_id = current_user.id
       end
 
-      if @checkout.save
-        session.delete(:order_id)
-        session[:checkout_id] = @checkout.id
-
-        # Creates a new order for the customer when they checkout
-        # Saves old order record, which is referred to by the checkout record
-        if current_user
-          order = Order.new(user_id: current_user.id)
+      respond_to do |format|
+        if @checkout.save
+          session.delete(:order_id)
+          session[:checkout_id] = @checkout.id
+  
+          # Creates a new order for the customer when they checkout
+          # Saves old order record, which is referred to by the checkout record
+          if current_user
+            order = Order.new(user_id: current_user.id)
+          else
+            order = Order.new
+          end
+          order.save
+          format.html { redirect_to checkouts_path, notice: 'Entrada de estoque criada com sucesso' }
         else
-          order = Order.new
+          format.html { render :new }
         end
-        order.save
-      else
-        redirect_to "new"
       end
+      
     end
   end
 

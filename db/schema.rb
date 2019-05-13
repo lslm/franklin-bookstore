@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_225052) do
+ActiveRecord::Schema.define(version: 2019_05_13_003132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "banners", force: :cascade do |t|
+  create_table "banners", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "name"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.datetime "image_updated_at"
   end
 
-  create_table "checkouts", force: :cascade do |t|
+  create_table "checkouts", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "billing_address"
@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["stock_id"], name: "index_items_on_stock_id"
   end
 
-  create_table "order_items", force: :cascade do |t|
-    t.integer "product_id"
+  create_table "order_items", id: :serial, force: :cascade do |t|
+    t.integer "item_id"
     t.integer "order_id"
     t.decimal "unit_price", precision: 12, scale: 3
     t.integer "quantity"
@@ -86,16 +86,15 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
-  create_table "order_statuses", force: :cascade do |t|
+  create_table "order_statuses", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", id: :serial, force: :cascade do |t|
     t.decimal "tax"
     t.decimal "gst"
     t.integer "user_id"
@@ -106,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
-  create_table "pages", force: :cascade do |t|
+  create_table "pages", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "content"
     t.datetime "created_at", null: false
@@ -123,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
-  create_table "pictures", force: :cascade do |t|
+  create_table "pictures", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -135,7 +134,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.decimal "price", precision: 8, scale: 2
@@ -172,7 +171,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.index ["product_id"], name: "index_stocks_on_product_id"
   end
 
-  create_table "uploads", force: :cascade do |t|
+  create_table "uploads", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
@@ -181,7 +180,7 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
     t.datetime "image_updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -222,8 +221,8 @@ ActiveRecord::Schema.define(version: 2019_05_12_225052) do
 
   add_foreign_key "items", "products"
   add_foreign_key "items", "stocks"
+  add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "stocks", "products"
 end

@@ -1,0 +1,21 @@
+<h1>Nome: <%=@item.product.name %></h1>
+
+<p>Descrição: <%=@item.product.description %></p>
+<p>Preço: <%=@item.product.price %></p>
+
+<%= form_for @order_item, remote: true do |f| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <p>Quantidade: <%= f.select :quantity, (1..@item.available_quantity) %></p>
+  <%= f.hidden_field :item_id, value: @item.id %>
+  <%= f.submit "Add to Cart", class: "custom-button text-sm" %>
+<% end %>
+
+<p>Autor: <%=@item.product.author %></p>
+<p>Categoria: <%=@item.product.category.name %></p>
+<p>Ano: <%=@item.product.year %></p>
+<p>Editora: <%=@item.product.publisher %></p>
+<p>Edição: <%=@item.product.edition %></p>
+<p>ISBN: <%=@item.product.isbn %></p>
+<p>Páginas: <%=@item.product.pages %></p>
+<p>Dimensões: <%=@item.product.dimensions %></p>
+<p>Código de barras: <%=@item.product.barcode %></p>
