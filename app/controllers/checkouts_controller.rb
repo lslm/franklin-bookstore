@@ -34,6 +34,8 @@ class CheckoutsController < ApplicationController
 
       respond_to do |format|
         if @checkout.save
+          update_stock
+
           session.delete(:order_id)
           session[:checkout_id] = @checkout.id
   
@@ -56,10 +58,26 @@ class CheckoutsController < ApplicationController
 
   private
 
+  def update_stock
+    @order.order_items.each do |order_item|
+      item = order_item.item
+
+      item.update(sold: true)
+      binding.pry
+      items_to_be_sold = Item.where(product_id: item.product_id, sold: false).limit(order_item.quantity - 1)
+
+      items_to_be_sold.each do |item|
+        item.update(sold: true)
+      end
+    end
+  end
+
   def checkouts_params
-    params.require(:checkout).permit(:total, :first_name, :last_name, :email, :shipping_address, :shipping_suburb, :shipping_zip, :shipping_state,
+    params.require(:checkout).permit(
+      :total, :first_name, :last_name, :email, :shipping_address, :shipping_suburb, :shipping_zip, :shipping_state,
       :billing_address, :billing_suburb, :billing_zip, :billing_state, :phone, :order_id, :user_id,
-      :credit_card_number, :credit_card_name, :credit_card_expire_date, :credit_card_ccv)
+      :credit_card_number, :credit_card_name, :credit_card_expire_date, :credit_card_ccv
+    )
   end
 
   def find_order
