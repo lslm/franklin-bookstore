@@ -1,5 +1,5 @@
 class RemovePicturesFromProducts < ActiveRecord::Migration[5.0]
   def change
-  	remove_column :products, :pictures
+  	remove_column :products, :pictures, :string
   end
 end
