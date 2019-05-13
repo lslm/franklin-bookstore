@@ -1,8 +1,4 @@
 class StocksController < ApplicationController
-<<<<<<< HEAD
-
-=======
->>>>>>> Adicionado controle de Estoque
   def index
     @stocks = Stock.all
   end
@@ -50,14 +46,9 @@ class StocksController < ApplicationController
   end
 
   def destroy
-<<<<<<< HEAD
-    @stock = Stock.find(params[:id])
-    @stock.destroy
-=======
     stock = Stock.find(params[:id])
 
     stock.destroy
->>>>>>> Adicionado controle de Estoque
     respond_to do |format|
       format.html { redirect_to stocks_url, notice: 'Stock was successfully destroyed.' }
       format.json { head :no_content }
@@ -70,10 +61,7 @@ class StocksController < ApplicationController
     stock.quantity.times do
       item = Item.new(
         stock_id: stock.id,
-<<<<<<< HEAD
-=======
         product_id: stock.product_id,
->>>>>>> Adicionado controle de Estoque
         sold: false
       )
 

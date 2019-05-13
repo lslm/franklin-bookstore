@@ -11,6 +11,7 @@
       <th>Quantity</th>
       <th>Unit price</th>
       <th>Total</th>
+      <th>Ação</th>
     </tr>
     <% @checkout.order.order_items.each do |order_item| %>
       <tr>
@@ -18,6 +19,9 @@
         <td><%= order_item  .quantity %></td>
         <td><%= number_to_currency(order_item.unit_price) %></td>
         <td><%= number_to_currency(order_item.total_price) %></td>
+        <td>
+          <%= link_to 'Solicitar troca', new_return_path(item_id: order_item.item_id) %>
+        </td>
       </tr>
     <% end %>
   </table>

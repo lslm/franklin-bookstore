@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
   resources :checkouts, param: :slug
   resources :shop_items
+  resources :returns
   
   resources :pages, param: :slug do 
     collection { post :sort }

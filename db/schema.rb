@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_003132) do
+ActiveRecord::Schema.define(version: 2019_05_13_023838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,17 @@ ActiveRecord::Schema.define(version: 2019_05_13_003132) do
     t.string "activation_reason"
   end
 
+  create_table "returns", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.string "return_reason"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_returns_on_item_id"
+    t.index ["user_id"], name: "index_returns_on_user_id"
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "quantity"
@@ -224,5 +235,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_003132) do
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "order_statuses"
+  add_foreign_key "returns", "items"
+  add_foreign_key "returns", "users"
   add_foreign_key "stocks", "products"
 end

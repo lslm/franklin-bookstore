@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :banners
   has_many :checkouts
   has_many :pages
+  has_many :returns
 
   has_attached_file :image, 
     styles: { 
