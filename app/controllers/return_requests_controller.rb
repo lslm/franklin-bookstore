@@ -20,7 +20,7 @@ class ReturnRequestsController < ApplicationController
   private
 
   def create_coupom_for_user(return_request)
-    coupom_value = return_request.item.stock.price
+    coupom_value = return_request.item.stock.price * return_request.quantity
     user = return_request.user
     code = rand(36**6).to_s(36)
 

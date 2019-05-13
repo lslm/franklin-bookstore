@@ -11,6 +11,7 @@ class ReturnsController < ApplicationController
     @return = Return.new
 
     @item = Item.find(params[:item_id])
+    @quantity_available = params[:quantity]
   end
 
   def create
@@ -32,6 +33,6 @@ class ReturnsController < ApplicationController
   private
 
   def return_params
-    params.require(:return).permit(:return_reason, :item_id)
+    params.require(:return).permit(:return_reason, :item_id, :quantity)
   end
 end

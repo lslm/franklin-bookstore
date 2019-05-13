@@ -7,6 +7,8 @@
         <th scope="col">Data</th>
         <th scope="col">Usuário</th>
         <th scope="col">Produto</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Quantidade</th>
         <th scope="col">Status</th>
         <th scope="col">Ação</th>
       </tr>
@@ -18,6 +20,8 @@
           <td><%= return_request.created_at%></td>
           <td><%= return_request.user.first_name%></td>
           <td><%= return_request.item.product.name %></td>
+          <td><%= return_request.item.stock.price %></td>
+          <td><%= return_request.quantity %></td>
           <td><%= return_request.status %></td>
           <td><%= link_to 'Visualizar', return_request_path(return_request) %></td>
         </tr>

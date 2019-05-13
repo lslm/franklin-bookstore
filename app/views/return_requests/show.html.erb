@@ -2,6 +2,8 @@
 
 <p>Data de solicitação: <%= @return_request.created_at %></p>
 <p>Status: <%= @return_request.status %></p>
+<p>Valor unitário: <%= @return_request.item.stock.price %></p>
+<p>Quantidade: <%= @return_request.quantity %></p>
 
 <h1>Update status</h1>
 
