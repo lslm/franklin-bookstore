@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :stocks
     resources :orders
+    resources :return_requests
   end
 
   get 'all-banners', to: 'banners#display'
