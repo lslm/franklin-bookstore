@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root "items#index"
+  root "shop_items#index"
+
+  devise_for :users
 
   resources :items
   resources :banners
@@ -23,19 +25,4 @@ Rails.application.routes.draw do
 
   get 'all-banners', to: 'banners#display'
   post 'uploads' => 'uploads#create'
-  
-  devise_for :users,
-    path: "", 
-    controllers: { 
-      registrations: 'registrations', 
-      :omniauth_callbacks => "users/omniauth_callbacks" 
-    },
-    path_names: { 
-      sign_in: 'login', 
-      password: 'forgot', 
-      confirmation: 'confirm', 
-      unlock: 'unlock', 
-      sign_up: 'register', 
-      sign_out: 'logout' 
-    }
 end

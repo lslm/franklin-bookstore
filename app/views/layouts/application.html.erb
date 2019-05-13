@@ -49,7 +49,7 @@
                 <% else %>
                   <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
                 <% end %>
-                <%= link_to "Sair", destroy_user_session_path, method: :delete, alt: "Log Out", title: "Log Out", class: 'dropdown-item' %>
+                <%= button_to "Sair", destroy_user_session_path, method: :delete, alt: "Log Out", title: "Log Out", class: 'dropdown-item' %>
               <% else %>
                 <%= link_to "Entrar", new_user_session_path, alt: "Log In", title: "Log In", class: 'dropdown-item' %>
               <% end %>
