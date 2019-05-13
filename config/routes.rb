@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
   resources :orders, except: [:edit, :update, :destroy]
   resources :checkouts, except: [:edit, :update, :destroy], param: :slug
+  resources :shop_items
   
   resources :pages, param: :slug do 
     collection { post :sort }

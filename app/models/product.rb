@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 
   has_many :pictures, as: :imageable, dependent: :delete_all
   has_many :order_items
+  has_many :items
 
   default_scope { where(sold_out: false) }
 
