@@ -8,10 +8,20 @@ class Product < ApplicationRecord
 
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
-  validates :name, presence: true, length: { in: 2..75 }
-  validates :description, presence: true, length: { in: 10..2000 }
+  validates :name, presence: true
+  validates :description, presence: true
   validates :category_id, presence: true
   validates :user_id, presence: true
+  validates :author, presence: true
+  validates :year, presence: true
+  validates :publisher, presence: true
+  validates :edition, presence: true
+  validates :isbn, presence: true
+  validates :pages, presence: true
+  validates :dimensions, presence: true
+  validates :barcode, presence: true
+  validates :active, presence: true
+  validates :activation_reason, presence: true
 
   def self.image_styles
     {
