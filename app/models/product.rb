@@ -20,7 +20,6 @@ class Product < ApplicationRecord
   validates :pages, presence: true
   validates :dimensions, presence: true
   validates :barcode, presence: true
-  validates :active, presence: true
   validates :activation_reason, presence: true
 
   def self.image_styles
