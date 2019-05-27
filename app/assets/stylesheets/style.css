@@ -10335,6 +10335,9 @@ tbody.collapse.show {
       color: #fff; }
 
 .card {
+  -webkit-box-shadow: -9px 10px 11px -1px rgba(179,179,179,1);
+  -moz-box-shadow: -9px 10px 11px -1px rgba(179,179,179,1);
+  box-shadow: -9px 10px 11px -1px rgba(179,179,179,1);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10343,7 +10346,8 @@ tbody.collapse.show {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  margin: 25px; }
   .card > hr {
     margin-right: 0;
     margin-left: 0; }
@@ -14205,7 +14209,7 @@ html {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  background: #cfcfcf;
+  background: #e4e4e4;
   min-height: calc(100vh - 63px);
   display: -webkit-flex;
   display: flex;
