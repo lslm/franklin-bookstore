@@ -1,98 +1,102 @@
 <%= form_for @product, :html => { multipart: true }, validate: true do |f| %>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :category, 'Categoria' %>
-            <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Selecione uma categoria" }, class: 'form-control' %>
-          </div>
-  
-          <div class="col">
-            <%= f.label :name, 'Título' %>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-        </div>
+  <% if @product.errors.any? %>
+  <ul>
+    <% @product.errors.full_messages.each do |error_message| %>
+      <li><%= error_message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :category, 'Categoria' %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Selecione uma categoria" }, class: 'form-control' %>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :description, 'Descrição' %>
-            <%= f.text_area :description, class: 'form-control' %>
-          </div>
-        </div>
+      <div class="col">
+        <%= f.label :name, 'Título' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :description, 'Descrição' %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :author, 'Autor' %>
+        <%= f.text_field :author, class: 'form-control' %>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :author, 'Autor' %>
-            <%= f.text_field :author, class: 'form-control' %>
-          </div>
+      <div class="col">
+        <%= f.label :year, 'Ano' %>
+        <%= f.text_field :year, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
 
-          <div class="col">
-            <%= f.label :year, 'Ano' %>
-            <%= f.text_field :year, class: 'form-control' %>
-          </div>
-        </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :publisher, 'Editora' %>
+        <%= f.text_field :publisher, class: 'form-control' %>
       </div>
 
-    
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :publisher, 'Editora' %>
-            <%= f.text_field :publisher, class: 'form-control' %>
-          </div>
+      <div class="col">
+        <%= f.label :edition, 'Edição' %>
+        <%= f.number_field :edition, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
 
-          <div class="col">
-            <%= f.label :edition, 'Edição' %>
-            <%= f.number_field :edition, class: 'form-control' %>
-          </div>
-        </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :isbn, 'ISBN' %>
+        <%= f.text_field :isbn, class: 'form-control' %>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :isbn, 'ISBN' %>
-            <%= f.text_field :isbn, class: 'form-control' %>
-          </div>
+      <div class="col">
+        <%= f.label :pages, 'Quantidade de páginas' %>
+        <%= f.number_field :pages, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
 
-          <div class="col">
-            <%= f.label :pages, 'Quantidade de páginas' %>
-            <%= f.number_field :pages, class: 'form-control' %>
-          </div>
-        </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :dimensions, 'Dimensões' %>
+        <%= f.text_field :dimensions, class: 'form-control' %>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :dimensions, 'Dimensões' %>
-            <%= f.text_field :dimensions, class: 'form-control' %>
-          </div>
+      <div class="col">
+        <%= f.label :barcode, 'Código de barras' %>
+        <%= f.text_field :barcode, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
 
-          <div class="col">
-            <%= f.label :barcode, 'Código de barras' %>
-            <%= f.text_field :barcode, class: 'form-control' %>
-          </div>
-        </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :active, 'Ativação' %>
+        <%= f.select :active, [['Ativo', true], ['Inativo', false]], {}, class: 'form-control'  %>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :active, 'Ativo' %>
-            <%= f.check_box :active, class: 'form-control' %>
-          </div>
-
-          <div class="col">
-            <%= f.label :activation_reason, 'Motivo de ativação/desativação' %>
-            <%= f.text_field :activation_reason, class: 'form-control' %>
-          </div>
-        </div>
+      <div class="col">
+        <%= f.label :activation_reason, 'Motivo de ativação/desativação' %>
+        <%= f.text_field :activation_reason, class: 'form-control' %>
       </div>
     </div>
   </div>

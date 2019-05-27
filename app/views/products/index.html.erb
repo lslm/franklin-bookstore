@@ -1,32 +1,35 @@
-<div class="center">
-  <h1>Products</h1>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Título</th>
-        <th scope="col">Autor</th>
-        <th scope="col">Ano</th>
-        <th scope="col">Data de cadastro</th>
-        <th scope="col" colspan="2">Ação</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @products.each do |product| %>
+<div class="card">
+  <div class="card-header">
+    <h1>Produtos cadastrados</h1>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= link_to product.id, product_path(product) %></td>
-          <td><%= product.name %></td>
-          <td><%= product.author %></td>
-          <td><%= product.year %></td>
-          <td><%= product.created_at %></td>
-          <td><%= link_to 'Editar', edit_product_path(product.id) %></td>
-          <td><%= button_to 'Apagar', product, method: :delete, class: 'btn btn-danger btn-responsive', data: {confirm: 'Tem certeza?'} %></td>
+          <th scope="col">ID</th>
+          <th scope="col">Título</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Ano</th>
+          <th scope="col">Data de cadastro</th>
+          <th scope="col" colspan="2">Ação</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
 
-  <%= link_to "New product", new_product_path, class: "custom-button" %>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.id, product_path(product) %></td>
+            <td><%= product.name %></td>
+            <td><%= product.author %></td>
+            <td><%= product.year %></td>
+            <td><%= product.created_at %></td>
+            <td><%= link_to 'Editar', edit_product_path(product.id) %></td>
+            <td><%= button_to 'Apagar', product, method: :delete, class: 'btn btn-danger btn-responsive', data: {confirm: 'Tem certeza?'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "New product", new_product_path, class: "custom-button" %>
+  </div>
 </div>

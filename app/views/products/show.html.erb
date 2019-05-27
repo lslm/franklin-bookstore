@@ -1,15 +1,20 @@
-<h1>Produto <%= @product.id %></h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Produto <%= @product.id %></h1>
+  </div>
 
-<p>Nome: <%=@product.name %></p>
-<p>Descrição: <%=@product.description %></p>
-<p>Preço: <%=@product.price %></p>
-<p>Autor: <%=@product.author %></p>
-<p>Categoria: <%=@product.category.name %></p>
-<p>Ano: <%=@product.year %></p>
-<p>Editora: <%=@product.publisher %></p>
-<p>Edição: <%=@product.edition %></p>
-<p>ISBN: <%=@product.isbn %></p>
-<p>Páginas: <%=@product.pages %></p>
-<p>Dimensões: <%=@product.dimensions %></p>
-<p>Código de barras: <%=@product.barcode %></p>
-<p>Ativo: <%=@product.active %></p>
+  <div class="card-body">
+    <p>Nome: <%=@product.name %></p>
+    <p>Descrição: <%=@product.description %></p>
+    <p>Autor: <%=@product.author %></p>
+    <p>Categoria: <%=@product.category.name %></p>
+    <p>Ano: <%=@product.year %></p>
+    <p>Editora: <%=@product.publisher %></p>
+    <p>Edição: <%=@product.edition %></p>
+    <p>ISBN: <%=@product.isbn %></p>
+    <p>Páginas: <%=@product.pages %></p>
+    <p>Dimensões: <%=@product.dimensions %></p>
+    <p>Código de barras: <%=@product.barcode %></p>
+    <p>Ativo: <%=@product.active %></p>
+  </div>
+</div>
