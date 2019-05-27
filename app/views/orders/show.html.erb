@@ -14,7 +14,7 @@
         </tr>
         <% @order.order.order_items.each do |order_item| %>
           <tr>
-            <td><%= order_item.item.product.name %></td>
+            <td><%= order_item.stock.product.name %></td>
             <td><%= order_item.quantity %></td>
             <td><%= number_to_currency(order_item.unit_price) %></td>
             <td><%= number_to_currency(order_item.total_price) %></td>
