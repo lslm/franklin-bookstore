@@ -1,46 +1,101 @@
-<div class="center">
-  <%= simple_form_for @product, :html => { multipart: true }, validate: true do |f| %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Select A Category" } %>
-    <br>
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.input :author %>
-    <%= f.input :year %>
-    <%= f.input :publisher %>
-    <%= f.input :edition %>
-    <%= f.input :isbn %>
-    <%= f.input :pages %>
-    <%= f.input :dimensions %>
-    <%= f.input :barcode %>
-    <%= f.input :active %>
-    <%= f.input :activation_reason %>
-
-    <%= f.label :pictures %>
-    <div class="form-pictures">
-      <% if @product.pictures.count == 0 %>
-        <%= file_field_tag "images[]", type: :file, multiple: true, accept:'image/*' %>
-      <% else %>
-        <%= f.simple_fields_for :pictures do |image| %>
-          <div class="edit-pictures">
-            <div class="pictures-edit-options">
-              <div class="pictures-checkbox">
-                <%= image.check_box :_destroy %>
-                <%= image.label :_destroy, "Remove Image" %>
-              </div>
-              <%= image.label :image, "Replace Image" %>
-              <br>
-              <%= image.file_field :image, accept:'image/*' %>
-            </div>
-            <%= image_tag image.object.image.url(:thumb) %>
-            <hr>
+<%= form_for @product, :html => { multipart: true }, validate: true do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :category, 'Categoria' %>
+            <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Selecione uma categoria" }, class: 'form-control' %>
           </div>
-        <% end %>
-        <span class="upload-more-images">Upload More Images</span>
-        <%= file_field_tag "images[]", type: :file, multiple: true, accept:'image/*' %>
-      <% end %>
+  
+          <div class="col">
+            <%= f.label :name, 'Título' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :description, 'Descrição' %>
+            <%= f.text_area :description, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :author, 'Autor' %>
+            <%= f.text_field :author, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :year, 'Ano' %>
+            <%= f.text_field :year, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :publisher, 'Editora' %>
+            <%= f.text_field :publisher, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :edition, 'Edição' %>
+            <%= f.number_field :edition, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :isbn, 'ISBN' %>
+            <%= f.text_field :isbn, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :pages, 'Quantidade de páginas' %>
+            <%= f.number_field :pages, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :dimensions, 'Dimensões' %>
+            <%= f.text_field :dimensions, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :barcode, 'Código de barras' %>
+            <%= f.text_field :barcode, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :active, 'Ativo' %>
+            <%= f.check_box :active, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :activation_reason, 'Motivo de ativação/desativação' %>
+            <%= f.text_field :activation_reason, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <%= f.submit 'Salvar' %>
-  <% end %>
-
-</div>
+  <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+<% end %>
