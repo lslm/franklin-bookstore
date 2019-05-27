@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_164322) do
+ActiveRecord::Schema.define(version: 2019_05_27_032547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,11 +152,6 @@ ActiveRecord::Schema.define(version: 2019_05_13_164322) do
   create_table "products", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.decimal "price", precision: 8, scale: 2
-    t.decimal "old_price"
-    t.boolean "on_sale"
-    t.boolean "sold_out"
-    t.boolean "featured"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -169,7 +164,6 @@ ActiveRecord::Schema.define(version: 2019_05_13_164322) do
     t.string "edition"
     t.string "isbn"
     t.string "pages"
-    t.string "synopsis"
     t.string "dimensions"
     t.string "barcode"
     t.boolean "active"

@@ -6,13 +6,10 @@ class Product < ApplicationRecord
   has_many :order_items
   has_many :items
 
-  default_scope { where(sold_out: false) }
-
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   validates :name, presence: true, length: { in: 2..75 }
   validates :description, presence: true, length: { in: 10..2000 }
-  validates :price, presence: true
   validates :category_id, presence: true
   validates :user_id, presence: true
 
