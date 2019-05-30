@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :checkouts
   has_many :pages
   has_many :returns
+  has_many :addresses
 
   has_attached_file :image, 
     styles: { 
@@ -35,15 +36,10 @@ class User < ApplicationRecord
     },
     if: Proc.new {|a| a.image.present? }
 
-  validates :first_name, presence: false, length: { in: 2..100 }, :allow_blank => true 
-  validates :last_name, presence: false, length: { in: 2..100 }, :allow_blank => true 
+  validates :first_name, presence: false, length: { in: 2..100 }, :allow_blank => true
+  validates :last_name, presence: false, length: { in: 2..100 }, :allow_blank => true
   validates :email, presence: true, length: { in: 5..100 }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
-  validates :phone, presence: false, length: { in: 10..16 }, format: { with: /\A[\d\s-]+\z/ }, :allow_blank => true 
-
-  validates :shipping_address, :billing_address, presence: false, length: { in: 5..200 }, :allow_blank => true 
-  validates :shipping_suburb, :billing_suburb, presence: false, length: { in: 2..50 }, format: { with: /\A[A-Za-z\s]+\z/ }, :allow_blank => true 
-  validates :shipping_zip, :billing_zip, presence: false, :allow_blank => true 
-  validates :shipping_state, :billing_state, presence: false, length: { in: 2..3 }, :allow_blank => true 
+  validates :phone, presence: false, length: { in: 10..16 }, format: { with: /\A[\d\s-]+\z/ }, :allow_blank => true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
