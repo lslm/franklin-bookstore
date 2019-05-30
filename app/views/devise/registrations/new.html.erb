@@ -1,20 +1,69 @@
-<div class="center">
-  <h2>Sign up</h2>
+<div class="row">
+  <div class="col-md-8 center">
+    <div class="card">
+      <div class="card-header">
+        <h1>Criar conta</h1>
+      </div>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), validate: true) do |f| %>
-    <%= f.error_notification %>
+      <div class="card-body">
+        <%= form_for resource, url: registration_path(resource_name) do |f| %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :first_name, 'Primeiro nome' %>
+                <%= f.text_field :first_name, class: 'form-control' %>
+              </div>
 
-    <div class="form-inputs">
-      <%= f.input :email, required: true, autofocus: true %>
-      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation, required: true %>
+              <div class="col">
+                <%= f.label :last_name, 'Último nome' %>
+                <%= f.text_field :last_name, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :email, 'Email' %>
+                <%= f.text_field :email, class: 'form-control'%>
+              </div>
+
+              <div class="col">
+                <%= f.label :phone, 'Telefone para contato' %>
+                <%= f.text_field :phone, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :password, 'Senha' %>
+                <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+              </div>
+
+              <div class="col">
+                <%= f.label :password_confirmation, 'Confirme sua senha' %>
+                <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="form-actions">
+            <%= f.submit "Salvar", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+
+        <br>
+      </div>
+
+      <div class="card-footer">
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
-    </div>
-
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+  </div>
 </div>

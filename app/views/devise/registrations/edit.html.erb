@@ -1,62 +1,150 @@
-<div class="center">
-  <div class="devise-edit">
-    <div class="user-details">
-      <p><%= @user.first_name %> <%= @user.last_name %></p>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h1>Meus dados</h1>
+  </div>
 
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
-      <%= f.error_notification %>
+  <div class="card-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :first_name, 'Primeiro nome' %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+          </div>
+  
+          <div class="col">
+            <%= f.label :last_name, 'Último nome' %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
 
-      <div class="form-inputs">
-        <%= f.input :email, required: true, autofocus: true %>
-
-        <h2>Personal</h2>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :phone %>
-        
-        <hr>
-        
-        <h2>Billing address</h2>
-        <%= f.input :billing_address %>
-        <%= f.input :billing_suburb %>
-        <%= f.input :billing_zip %>
-        <%= f.input :billing_state %>
-        
-        <hr>
-        
-        <h2>Shipping address</h2>
-        <%= f.input :shipping_address %>
-        <%= f.input :shipping_suburb %>
-        <%= f.input :shipping_zip %>
-        <%= f.input :shipping_state %>
-        <%= f.input :image, as: :file %>
-
-        <hr>
-
-        <h2>Payment method</h2>
-        <%= f.input :credit_card_number %>
-        <%= f.input :credit_card_name %>
-        <%= f.input :credit_card_expire_date %>
-        <%= f.input :credit_card_ccv %>
-        
-        <hr>
-        <%= f.input :password, autocomplete: "off", label: "New password", hint: "Leave blank if you do not want to change it", required: false, :input_html => { :class => "edit-password" } %>
-        <div class="new-password-confirmation">
-          <%= f.input :password_confirmation, label: "New password confirmation", required: false %>
+          <div class="col">
+            <%= f.label :phone, 'Telefone para contato' %>
+            <%= f.text_field :phone, class: 'form-control' %>
+          </div>
         </div>
-        <hr>
-        <%= f.input :current_password, hint: "We need your current password to confirm your changes", required: true %>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :email, 'Email' %>
+            <%= f.text_field :email, class: 'form-control'%>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>Endereços</h2>
+
+      <%= f.fields_for :addresses do |address_form| %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <%= address_form.label :street, 'Rua' %>
+              <%= address_form.text_field :street, class: 'form-control' %>
+            </div>
+
+            <div class="col">
+              <%= address_form.label :number, 'Número' %>
+              <%= address_form.text_field :number, class: 'form-control' %>
+            </div>
+
+            <div class="col">
+              <%= address_form.label :zip_code, 'CEP' %>
+              <%= address_form.text_field :zip_code, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <%= address_form.label :city, 'Cidade' %>
+              <%= address_form.text_field :city, class: 'form-control' %>
+            </div>
+
+            <div class="col">
+              <%= address_form.label :state, 'Estado' %>
+              <%= address_form.text_field :state, class: 'form-control' %>
+            </div>
+
+            <div class="col">
+              <%= address_form.label :address_type, 'Tipo de endereço' %>
+              <%= address_form.select :address_type, [['Cobrança', :billing], ['Entrega', :shipping]], {}, class: 'form-control'  %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <hr>
+
+      <h2>Cartões de crédito</h2>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :credit_card_number, 'Número' %>
+            <%= f.text_field :credit_card_number, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :credit_card_name, 'Nome (como escrito no cartão)' %>
+            <%= f.text_field :credit_card_name, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :credit_card_expire_date, 'Data de vencimento' %>
+            <%= f.text_field :credit_card_expire_date, class: 'form-control' %>
+          </div>
+
+          <div class="col">
+            <%= f.label :credit_card_ccv, 'CCV' %>
+            <%= f.text_field :credit_card_ccv, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      
+      <hr>
+
+      <h2>Alteração de senha</h2>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :password, 'Senha (deixe em branco se não quiser alterá-la)' %>
+            <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :password_confirmation, 'Confirme sua senha' %>
+            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+      
+      <hr>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :current_password, 'Confirme sua senha para salvar' %>
+            <%= f.password_field :current_password, class: 'form-control', required: true %>
+          </div>
+        </div>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Update" %>
+        <%= f.submit "Salvar", class: 'btn btn-primary' %>
       </div>
     <% end %>
-    
+
     <br>
 
-    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+    <%= link_to "Apagar minha conta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
   </div>
-
 </div>
