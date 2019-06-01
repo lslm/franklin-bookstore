@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_212037) do
     t.string "zip_code"
     t.string "city"
     t.string "state"
-    t.string "type"
+    t.string "address_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
