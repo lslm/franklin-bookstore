@@ -16,5 +16,9 @@
     <p>Dimensões: <%=@product.dimensions %></p>
     <p>Código de barras: <%=@product.barcode %></p>
     <p>Ativo: <%=@product.active %></p>
+
+    <% @product.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
   </div>
 </div>

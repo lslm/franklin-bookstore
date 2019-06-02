@@ -19,12 +19,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        if params[:images]
-          params[:images].each { |image|
-            @product.pictures.create(image: image, imageable_id: @product.id)
-          }
-        end
-
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -42,13 +36,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if @product.update(products_params)
-      # Check if any new images have been added
-      if params[:images]
-        params[:images].each do |image|
-          # Create the images
-          @product.pictures.create(image: image, imageable_id: @product.id)
-        end
-      end
       redirect_to products_path
     else
       render "edit"
@@ -80,6 +67,6 @@ class ProductsController < ApplicationController
       :barcode,
       :active,
       :activation_reason,
-      pictures_attributes: [:id, :image, :_destroy])
+      images: [])
   end
 end

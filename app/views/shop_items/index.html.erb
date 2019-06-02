@@ -3,14 +3,14 @@
     <div class="card-columns">
       <% @items_available.each do |item| %>
       <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <%= image_tag item.product.images.first, class: 'card-img-top' %>
         <div class="card-body">
           <h5 class="card-title"><%= item.product.name %></h5>
           <p class="card-text"><%= "#{item.product.description[0..100]}..." %></p>
           <div class="row">
             <div class="col">
               <%= link_to 'Visualizar', shop_item_path(item.id), class: 'btn btn-primary' %>
-              <p class="card-title float-right"><%= item.price %></p>
+              <p class="card-title float-right"><%= number_to_currency item.price %></p>
             </div>
         </div>
         </div>
