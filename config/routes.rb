@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
   scope :users do
     resources :credit_cards
+    resources :addresses
   end
 
   resources :items
