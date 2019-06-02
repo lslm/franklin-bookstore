@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root "shop_items#index"
 
   devise_for :users, controllers: { registrations: 'registrations' }
+  scope :users do
+    resources :credit_cards
+  end
 
   resources :items
   resources :banners
@@ -11,7 +14,7 @@ Rails.application.routes.draw do
   resources :checkouts, param: :slug
   resources :shop_items
   resources :returns
-  
+
   resources :pages, param: :slug do 
     collection { post :sort }
   end
