@@ -10500,7 +10500,7 @@ tbody.collapse.show {
 
 @media (min-width: 576px) {
   .card-columns {
-    column-count: 3;
+    column-count: 4;
     column-gap: 1.25rem; }
     .card-columns .card {
       display: inline-block;
