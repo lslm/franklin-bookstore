@@ -1,27 +1,21 @@
-<div class="center">
-  <h1>Items disponíveis</h1>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Título</th>
-        <th scope="col">Autor</th>
-        <th scope="col">Ano</th>
-        <th scope="col">Preço</th>
-        <th scope="col">Ação</th>
-      </tr>
-    </thead>
-    
-    <tbody>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-columns">
       <% @items_available.each do |item| %>
-        <tr>
-          <td><%= item.product.name %></td>
-          <td><%= item.product.author %></td>
-          <td><%= item.product.year %></td>
-          <td><%= item.price %></td>
-          <td><%= link_to 'Visualizar', shop_item_path(item.id) %></td>
-        </tr>
+      <div class="card">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><%= item.product.name %></h5>
+          <p class="card-text"><%= "#{item.product.description[0..100]}..." %></p>
+          <div class="row">
+            <div class="col">
+              <%= link_to 'Visualizar', shop_item_path(item.id), class: 'btn btn-primary' %>
+              <p class="card-title float-right"><%= item.price %></p>
+            </div>
+        </div>
+        </div>
+      </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>
