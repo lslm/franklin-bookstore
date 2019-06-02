@@ -4,116 +4,97 @@
   </div>
 
   <div class="card-body">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
-      <div class="form-group">
-        <div class="row">
-          <div class="col">
-            <%= f.label :first_name, 'Primeiro nome' %>
-            <%= f.text_field :first_name, class: 'form-control' %>
-          </div>
-  
-          <div class="col">
-            <%= f.label :last_name, 'Último nome' %>
-            <%= f.text_field :last_name, class: 'form-control' %>
-          </div>
 
-          <div class="col">
-            <%= f.label :phone, 'Telefone para contato' %>
-            <%= f.text_field :phone, class: 'form-control' %>
-          </div>
-        </div>
+  <div class="row">
+    <div class="col-3">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" data-toggle="pill" href="#personal-data" role="tab" aria-controls="personal-data" aria-selected="true">Dados pessoais</a>
+        <a class="nav-link" data-toggle="pill" href="#addresses" role="tab" aria-controls="addresses" aria-selected="false">Endereço</a>
+        <a class="nav-link" data-toggle="pill" href="#credit-cards" role="tab" aria-controls="credit-cards" aria-selected="false">Cartões de crédito</a>
       </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="personal-data" role="tabpanel" aria-labelledby="personal-data">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %>
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <%= f.label :first_name, 'Primeiro nome' %>
+                  <%= f.text_field :first_name, class: 'form-control' %>
+                </div>
+        
+                <div class="col">
+                  <%= f.label :last_name, 'Último nome' %>
+                  <%= f.text_field :last_name, class: 'form-control' %>
+                </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.label :email, 'Email' %>
-            <%= f.text_field :email, class: 'form-control'%>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <h2>Endereços</h2>
-
-      <%= f.fields_for :addresses do |address_form| %>
-        <div class="form-group">
-          <div class="row">
-            <div class="col">
-              <%= address_form.label :street, 'Rua' %>
-              <%= address_form.text_field :street, class: 'form-control' %>
+                <div class="col">
+                  <%= f.label :phone, 'Telefone para contato' %>
+                  <%= f.text_field :phone, class: 'form-control' %>
+                </div>
+              </div>
             </div>
 
-            <div class="col">
-              <%= address_form.label :number, 'Número' %>
-              <%= address_form.text_field :number, class: 'form-control' %>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.label :email, 'Email' %>
+                  <%= f.text_field :email, class: 'form-control'%>
+                </div>
+              </div>
             </div>
 
-            <div class="col">
-              <%= address_form.label :zip_code, 'CEP' %>
-              <%= address_form.text_field :zip_code, class: 'form-control' %>
+            <hr>
+
+            <h2>Alteração de senha</h2>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.label :password, 'Senha (deixe em branco se não quiser alterá-la)' %>
+                  <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.label :password_confirmation, 'Confirme sua senha' %>
+                  <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.label :current_password, 'Confirme sua senha para salvar' %>
+                  <%= f.password_field :current_password, class: 'form-control', required: true %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Salvar", class: 'btn btn-primary' %>
+            </div>
+          <% end %>
         </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col">
-              <%= address_form.label :city, 'Cidade' %>
-              <%= address_form.text_field :city, class: 'form-control' %>
-            </div>
-
-            <div class="col">
-              <%= address_form.label :state, 'Estado' %>
-              <%= address_form.text_field :state, class: 'form-control' %>
-            </div>
-
-            <div class="col">
-              <%= address_form.label :address_type, 'Tipo de endereço' %>
-              <%= address_form.select :address_type, [['Cobrança', :billing], ['Entrega', :shipping]], {}, class: 'form-control'  %>
-            </div>
-          </div>
+        <div class="tab-pane fade" id="addresses" role="tabpanel" aria-labelledby="addresses">
+          
         </div>
-      <% end %>
 
-      <hr>
-
-      <h2>Alteração de senha</h2>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.label :password, 'Senha (deixe em branco se não quiser alterá-la)' %>
-            <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.label :password_confirmation, 'Confirme sua senha' %>
-            <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-6">
-            <%= f.label :current_password, 'Confirme sua senha para salvar' %>
-            <%= f.password_field :current_password, class: 'form-control', required: true %>
-          </div>
+        <div class="tab-pane fade" id="credit-cards" role="tabpanel" aria-labelledby="credit-cards">
+          <%= render 'credit_cards' %>
         </div>
       </div>
-
-      <div class="form-actions">
-        <%= f.submit "Salvar", class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    </div>
+  </div>
+    
 
     <br>
 

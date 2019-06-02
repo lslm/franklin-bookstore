@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Número</th>
+      <th scope="col">Data de expiração</th>
+      <th scope="col">CVC</th>
+      <th scope="col">Ação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @credit_cards.each do |credit_card| %>
+      <tr>
+        <td><%= credit_card.name %></td>
+        <td><%= credit_card.number %></td>
+        <td><%= credit_card.expire %></td>
+        <td><%= credit_card.cvc %></td>
+        <td><%= link_to 'Editar', edit_credit_card_path(credit_card.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Cadastrar novo cartão de crédito", new_credit_card_path, class: "custom-button" %>

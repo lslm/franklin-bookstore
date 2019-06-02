@@ -1,4 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
+  def edit
+    @credit_cards = current_user.credit_cards.all
+    super
+  end
+
   private
 
   def sign_up_params

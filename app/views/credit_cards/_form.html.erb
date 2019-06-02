@@ -34,5 +34,13 @@
     </div>
   </div>
 
-  <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+
+      <% if @credit_card.persisted? %>
+        <%= button_to 'Apagar', @credit_card, method: :delete, class: 'btn btn-danger float-right', data: {confirm: 'Tem certeza?'} %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
