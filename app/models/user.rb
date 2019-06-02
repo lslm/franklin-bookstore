@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :pages
   has_many :returns
   has_many :addresses
+  has_many :credit_cards
 
   has_attached_file :image, 
     styles: { 

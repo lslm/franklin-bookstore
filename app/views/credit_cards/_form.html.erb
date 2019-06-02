@@ -1,0 +1,38 @@
+<%= form_for @credit_card do |f| %>
+<% if @credit_card.errors.any? %>
+<ul>
+  <% @credit_card.errors.full_messages.each do |error_message| %>
+    <li><%= error_message %></li>
+  <% end %>
+</ul>
+<% end %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :name, 'Nome (como escrito no cartão)' %>
+        <%= f.text_field :name, class: 'form-control', autocomplete: 'cc-name' %>
+      </div>
+
+      <div class="col">
+        <%= f.label :number, 'Número' %>
+        <%= f.text_field :number, class: 'form-control', autocomplete: 'cc-number' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :expire, 'Validade' %>
+        <%= f.text_field :expire, class: 'form-control', autocomplete: 'cc-expire' %>
+      </div>
+
+      <div class="col">
+        <%= f.label :cvc, 'CVC' %>
+        <%= f.text_field :cvc, class: 'form-control', autocomplete: 'cc-cvc' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+<% end %>

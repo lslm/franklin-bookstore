@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Cartões de crédito</h1>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Número</th>
+          <th scope="col">Data de expiração</th>
+          <th scope="col">CVC</th>
+          <th scope="col" colspan="2">Ação</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @credit_cards.each do |credit_card| %>
+          <tr>
+            <td><%= credit_card.name %></td>
+            <td><%= credit_card.number %></td>
+            <td><%= credit_card.expire %></td>
+            <td><%= credit_card.cvc %></td>
+            <td><%= link_to 'Editar', edit_credit_card_path(credit_card.id) %></td>
+            <td><%= button_to 'Apagar', credit_card, method: :delete, class: 'btn btn-danger btn-responsive', data: {confirm: 'Tem certeza?'} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "Cadastrar novo cartão de crédito", new_credit_card_path, class: "custom-button" %>
+  </div>
+</div>
