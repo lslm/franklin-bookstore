@@ -15,6 +15,10 @@ class CreditCardsController < ApplicationController
     end
   end
 
+  def edit
+    @credit_card = current_user.credit_cards.find(params[:id])
+  end
+
   def update
     @credit_card = current_user.credit_cards.find(params[:id])
 
@@ -27,14 +31,8 @@ class CreditCardsController < ApplicationController
 
   def destroy
     credit_card = current_user.credit_cards.find(params[:id])
-
     credit_card.destroy!
-
     redirect_to edit_user_registration_path, notice: 'Cartão apagado', anchor: 'credit-cards'
-  end
-
-  def edit
-    @credit_card = current_user.credit_cards.find(params[:id])
   end
 
   private

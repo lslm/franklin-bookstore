@@ -9,6 +9,12 @@
       <div class="card-body">
         <%= render "form" %>
       </div>
+
+      <% if @credit_card.persisted? %>
+        <div class="card-footer">
+          <%= button_to 'Destroy', @credit_card, class: 'btn btn-danger float-right',  method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
