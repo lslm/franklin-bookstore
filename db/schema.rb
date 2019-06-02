@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_032547) do
+ActiveRecord::Schema.define(version: 2019_05_30_212037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "street"
+    t.string "number"
+    t.string "zip_code"
+    t.string "city"
+    t.string "state"
+    t.string "address_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "banners", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -216,20 +229,12 @@ ActiveRecord::Schema.define(version: 2019_05_27_032547) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.string "billing_address"
-    t.string "billing_suburb"
-    t.integer "billing_zip"
-    t.string "billing_state"
     t.string "phone"
     t.boolean "admin"
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
-    t.string "shipping_address"
-    t.string "shipping_suburb"
-    t.integer "shipping_zip"
-    t.string "shipping_state"
     t.string "provider"
     t.string "uid"
     t.string "credit_card_number"
@@ -240,6 +245,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_032547) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "items", "products"
   add_foreign_key "items", "stocks"
   add_foreign_key "order_items", "orders"
