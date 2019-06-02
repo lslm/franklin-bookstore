@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   def edit
     @credit_cards = current_user.credit_cards.all
+    @addresses = current_user.addresses.all
     super
   end
 

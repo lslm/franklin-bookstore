@@ -1,0 +1,58 @@
+<%= form_for @address do |f| %>
+  <% if @address.errors.any? %>
+  <ul>
+    <% @address.errors.full_messages.each do |error_message| %>
+      <li><%= error_message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-2">
+        <%= f.label :name, 'Nome' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="col-6">
+        <%= f.label :street, 'Rua' %>
+        <%= f.text_field :street, class: 'form-control' %>
+      </div>
+
+      <div class="col-2">
+        <%= f.label :number, 'Número' %>
+        <%= f.text_field :number, class: 'form-control' %>
+      </div>
+
+      <div class="col-2">
+        <%= f.label :zip_code, 'CEP' %>
+        <%= f.text_field :zip_code, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :city, 'Cidade' %>
+        <%= f.text_field :city, class: 'form-control' %>
+      </div>
+
+      <div class="col">
+        <%= f.label :state, 'Estado' %>
+        <%= f.text_field :state, class: 'form-control' %>
+      </div>
+
+      <div class="col">
+        <%= f.label :address_type, 'Tipo de endereço' %>
+        <%= f.select :address_type, [['Cobrança', :billing], ['Entrega', :shipping]], {}, class: 'form-control'  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

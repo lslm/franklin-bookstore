@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Endereço</th>
+      <th scope="col">Tipo de endereço</th>
+      <th scope="col">Ação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.name %></td>
+        <td><%= "#{address.street}, #{address.number}, #{address.state}" %></td>
+        <td><%= address.address_type %></td>
+        <td><%= link_to 'Editar', edit_address_path(address.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Cadastrar novo endereço", new_address_path, class: "btn" %>
