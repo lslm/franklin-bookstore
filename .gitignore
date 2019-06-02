@@ -21,3 +21,4 @@
 
 # Ignore seed images, can provide own
 /db/seed/images
+/storage/
