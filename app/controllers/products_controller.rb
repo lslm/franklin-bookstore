@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @products = Product.all.order(params[:sort])
+    @products = Product.all.order(:id)
   end
 
   def show

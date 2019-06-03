@@ -5,7 +5,7 @@
       <div class="card">
         <%= image_tag item.product.images.first, class: 'card-img-top' %>
         <div class="card-body">
-          <h5 class="card-title"><%= item.product.name %></h5>
+          <h5 class="card-title"><b><%= item.product.name %></b></h5>
           <p class="card-text"><%= "#{item.product.description[0..100]}..." %></p>
           <div class="row">
             <div class="col">

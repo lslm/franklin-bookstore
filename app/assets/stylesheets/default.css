@@ -3,3 +3,7 @@
   width: 50%;
   display: block;
 }
+
+label {
+  font-weight: bold;
+}
