@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_181215) do
+ActiveRecord::Schema.define(version: 2019_06_03_041824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,14 +86,15 @@ ActiveRecord::Schema.define(version: 2019_06_02_181215) do
     t.string "shipping_suburb"
     t.integer "shipping_zip"
     t.string "shipping_state"
-    t.string "slug", null: false
     t.string "status"
     t.string "credit_card_number"
     t.string "credit_card_name"
     t.string "credit_card_expire_date"
     t.string "credit_card_ccv"
     t.string "coupom_code"
-    t.index ["slug"], name: "index_checkouts_on_slug", unique: true
+    t.string "billing_number"
+    t.string "shipping_number"
+    t.boolean "completed"
   end
 
   create_table "coupoms", force: :cascade do |t|

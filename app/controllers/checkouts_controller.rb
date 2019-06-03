@@ -4,11 +4,11 @@ class CheckoutsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @checkouts = current_user.checkouts
+    @checkouts = current_user.checkouts.where(completed: true)
   end
 
   def show
-    @checkout = Checkout.find_by_slug(params[:slug])
+    @checkout = Checkout.find(params[:id])
     @order = Order.find_by_id(@checkout.order_id)
     @order_items = Order.find_by_id(@order.id).order_items
     @order_items.each do |order_item|
@@ -92,6 +92,6 @@ class CheckoutsController < ApplicationController
   end
 
   def find_checkout
-    @checkout = Checkout.find_by_slug(params[:slug])
+    @checkout = Checkout.find(params[:id])
   end
 end

@@ -48,10 +48,10 @@
                   <%= link_to "Estoque", stocks_path, class: 'dropdown-item' %>
                   <%= link_to "Pedidos", orders_path, class: 'dropdown-item' %>
                   <%= link_to "Solicitações de troca", return_requests_path, class: 'dropdown-item' %>
-                <% else %>
-                  <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
-                  <%= link_to "Meus pedidos de troca", returns_path, class: 'dropdown-item' %>
                 <% end %>
+                <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
+                <%= link_to "Meus pedidos de troca", returns_path, class: 'dropdown-item' %>
+                <%= link_to "Meus cupons", coupoms_path, class: 'dropdown-item' %>
                 <%= link_to "Meu perfil", edit_user_registration_path, class: 'dropdown-item' %>
                 <%= button_to "Sair", destroy_user_session_path, method: :delete, alt: "Log Out", title: "Log Out", class: 'dropdown-item' %>
               <% else %>

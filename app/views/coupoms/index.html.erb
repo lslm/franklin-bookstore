@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Meus cupons</h1>
+  </div>
+
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <th>Código</th>
+        <th>Valor</th>
+        <th>Usado?</th>
+      </tr>
+      <% @coupoms.each do |coupom| %>
+        <tr>
+          <td><b><%= coupom.code %></b></td>
+          <td><%= number_to_currency coupom.value %></td>
+          <td><%= coupom.used %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :returns
   has_many :addresses
   has_many :credit_cards
+  has_many :coupoms
 
   has_attached_file :image, 
     styles: { 

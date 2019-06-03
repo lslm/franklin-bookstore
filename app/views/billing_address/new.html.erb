@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-8 center">
+    <div class="card">
+      <div class="card-header">
+        <h1>Endereço de cobrança</h1>
+      </div>
+
+      <div class="card-body">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingAddressesModal">
+                Selecionar endereços
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <%= form_for @checkout, url: billing_address_index_url do |f| %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <%= f.label :billing_address, 'Endereço' %>
+                <%= f.text_field :billing_address, class: 'form-control', value: @billing_address ? @billing_address.street : "" %>
+              </div>
+
+              <div class="col-3">
+                <%= f.label :billing_number, 'Número' %>
+                <%= f.text_field :billing_number, class: 'form-control', value: @billing_address ? @billing_address.number : "" %>
+              </div>
+
+              <div class="col-3">
+                <%= f.label :billing_zip, 'CEP' %>
+                <%= f.text_field :billing_zip, class: 'form-control', value: @billing_address ? @billing_address.zip_code : "" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col">
+                <%= f.label :billing_suburb, 'Cidade' %>
+                <%= f.text_field :billing_suburb, class: 'form-control', value: @billing_address ? @billing_address.city : "" %>
+              </div>
+
+              <div class="col">
+                <%= f.label :billing_state, 'Estado' %>
+                <%= f.text_field :billing_state, class: 'form-control', value: @billing_address ? @billing_address.state : "" %>
+              </div>
+            </div>
+          </div>
+
+          <%= check_box_tag :save_address %>
+          <%= label_tag :save_address, 'Salvar endereço'%>
+
+          <%= f.submit 'Continuar', class: 'btn btn-primary float-right' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'billing_addresses_modal' %>

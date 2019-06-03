@@ -12,7 +12,16 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create]
   resource :cart, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
-  resources :checkouts, param: :slug
+
+  resources :checkouts
+  resources :coupoms
+
+  scope :checkout do
+    resources :billing_address
+    resources :shipping_address
+    resources :payment
+  end
+
   resources :shop_items
   resources :returns
 

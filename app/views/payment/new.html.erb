@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-8 center">
+    <div class="card">
+      <div class="card-header">
+        <h1>Meio de pagamento</h1>
+      </div>
+
+      <div class="card-body">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#creditCardsModal">
+                Selecionar cartões de crédito
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <%= form_for @checkout, url: payment_index_url, method: :post do |f| %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :credit_card_number, 'Número do cartão de crédito' %>
+                <%= f.text_field :credit_card_number, class: 'form-control', value: @credit_card ? @credit_card.number : "" %>
+              </div>
+
+              <div class="col">
+                <%= f.label :credit_card_name, 'Nome (como escrito no cartão)' %>
+                <%= f.text_field :credit_card_name, class: 'form-control', value: @credit_card ? @credit_card.name : "" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <%= f.label :credit_card_expire_date, 'Validade' %>
+                <%= f.text_field :credit_card_expire_date, class: 'form-control', value: @credit_card ? @credit_card.expire : "" %>
+              </div>
+
+              <div class="col">
+                <%= f.label :credit_card_ccv, 'CVC' %>
+                <%= f.text_field :credit_card_ccv, class: 'form-control', value: @credit_card ? @credit_card.cvc : "" %>
+              </div>
+            </div>
+          </div>
+
+          <%= hidden_field_tag :checkout_id, @checkout.id %>
+          <%= check_box_tag :save_credit_card %>
+          <%= label_tag :save_credit_card, 'Salvar cartão'%>
+
+          <%= f.submit 'Finalizar compra', class: 'btn btn-primary float-right' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'credit_cards_modal' %>

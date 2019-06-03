@@ -3,19 +3,17 @@ class OrdersController < ApplicationController
   before_action :authorize_admin, only: [:index, :edit]
 
   def index
-    @orders = Checkout.all.order("created_at DESC")
+    @orders = Checkout.where(completed: true).order("created_at DESC")
   end
 
   def show
-    @order = Checkout.find_by_slug(params[:id])
+    @order = Checkout.find(params[:id])
   end
 
   def update
-    @checkout = Checkout.find_by_slug(params[:id])
-
-		@checkout.update(orders_params)
-
-		redirect_to orders_path
+    @checkout = Checkout.find(params[:id])
+    @checkout.update(orders_params)
+    redirect_to orders_path
   end
 
   private

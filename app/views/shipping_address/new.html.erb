@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-md-8 center">
+    <div class="card">
+      <div class="card-header">
+        <h1>Endereço de entrega</h1>
+      </div>
+
+      <div class="card-body">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#shippingAddressesModal">
+                Selecionar endereços
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <%= form_for @checkout, url: shipping_address_index_url, method: :post do |f| %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <%= f.label :shipping_address, 'Endereço' %>
+                <%= f.text_field :shipping_address, class: 'form-control', value: @shipping_address ? @shipping_address.street : "" %>
+              </div>
+
+              <div class="col-3">
+                <%= f.label :shipping_number, 'Número' %>
+                <%= f.text_field :shipping_number, class: 'form-control', value: @shipping_address ? @shipping_address.number : "" %>
+              </div>
+
+              <div class="col-3">
+                <%= f.label :shipping_zip, 'CEP' %>
+                <%= f.text_field :shipping_zip, class: 'form-control', value: @shipping_address ? @shipping_address.zip_code : "" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+
+              <div class="col">
+                <%= f.label :shipping_suburb, 'Cidade' %>
+                <%= f.text_field :shipping_suburb, class: 'form-control', value: @shipping_address ? @shipping_address.city : "" %>
+              </div>
+
+              <div class="col">
+                <%= f.label :shipping_state, 'Estado' %>
+                <%= f.text_field :shipping_state, class: 'form-control', value: @shipping_address ? @shipping_address.state : "" %>
+              </div>
+            </div>
+          </div>
+
+          <%= hidden_field_tag :checkout_id, @checkout.id %>
+          <%= check_box_tag :save_address %>
+          <%= label_tag :save_address, 'Salvar endereço'%>
+
+          <%= f.submit 'Continuar', class: 'btn btn-primary float-right', method: :post %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'shipping_addresses_modal' %>

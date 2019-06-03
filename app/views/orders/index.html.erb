@@ -1,20 +1,24 @@
-<div class="center">
-  <h1>Listing orders</h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Pedidos</h1>
+  </div>
 
-  <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Cliente</th>
-      <th>Date</th>
-      <th>Status</th>
-    </tr>
-    <% @orders.each do |order| %>
+  <div class="card-body">
+    <table class="table">
       <tr>
-        <td><%= link_to order.slug, order_path(order) %></td>
-        <td><%= order.user.first_name %> <%= order.user.last_name %></td>
-        <td><%= order.created_at %></td>
-        <td><%= order.status %></td>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Date</th>
+        <th>Status</th>
       </tr>
-    <% end %>
-  </table>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.id, order_path(order) %></td>
+          <td><%= order.user.first_name %> <%= order.user.last_name %></td>
+          <td><%= order.created_at %></td>
+          <td><%= order.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
