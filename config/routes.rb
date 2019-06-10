@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :billing_address
     resources :shipping_address
     resources :payment
+    resources :summary
   end
 
   resources :shop_items

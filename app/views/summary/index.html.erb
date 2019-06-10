@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Resumo</h1>
+  </div>
+
+  <div class="card-body">
+    <h2>Items</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produto</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Preço unitário</th>
+          <th scope="col">Preço total</th>
+          <th scope="col">Quantidade</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @checkout.order.order_items.each do |order_item| %>
+          <tr>
+            <td><%= order_item.stock.product.name %></td>
+            <td><%= order_item.quantity %></td>
+            <td><%= order_item.stock.price %></td>
+            <td><%= order_item.quantity * order_item.stock.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h2>Preço</h2>
+    Total de items: <%= @checkout.total %><br>
+    <% if @coupom %>
+      Desconto: <%= @coupom.value %><br>
+    <% end %>
+    Preço a pagar: <%= @checkout.order.subtotal %>
+
+    <hr>
+
+    <h2>Cupom de desconto</h2>
+    <%= form_tag("/checkout/summary", method: "get") do %>
+      <%= hidden_field_tag :checkout_id, @checkout.id %>
+      <%= label_tag(:coupom_code, "Código do cupom") %>
+      <%= text_field_tag(:coupom_code) %>
+      <%= submit_tag("Aplicar cupom") %>
+    <% end %>
+
+    <hr>
+
+    <h2>Endereço de cobrança</h2>
+    Endereço: <%= @checkout.billing_address %><br>
+    Número: <%= @checkout.billing_number %><br>
+    CEP: <%= @checkout.billing_zip %><br>
+    Cidade: <%= @checkout.billing_suburb %><br>
+    Estado: <%= @checkout.billing_state %><br>
+    
+    <h2>Endereço de entrega</h2>
+    Endereço: <%= @checkout.shipping_address %><br>
+    Número: <%= @checkout.shipping_number %><br>
+    CEP: <%= @checkout.shipping_zip %><br>
+    Cidade: <%= @checkout.shipping_suburb %><br>
+    Estado: <%= @checkout.shipping_state %><br>
+
+    <h2>Pagamento</h2>
+    Número: <%= @checkout.credit_card_number %><br>
+    Nome: <%= @checkout.credit_card_name %><br>
+    CCV: <%= @checkout.credit_card_ccv %><br>
+    Validade: <%= @checkout.credit_card_expire_date %><br>
+
+    <hr>
+
+    <%= form_tag("/checkout/summary", method: "post") do %>
+      <%= hidden_field_tag :checkout_id, @checkout.id %>
+      <%= submit_tag("Finalizar compra", class: 'btn btn-primary') %>
+    <% end %>
+  </div>
+</div>

@@ -14,7 +14,6 @@ class PaymentController < ApplicationController
     @checkout.credit_card_expire_date = checkout_payment_params[:credit_card_expire_date]
     @checkout.order = current_order
     @checkout.user = current_user
-    @checkout.completed = true
 
     @checkout.save!
 
@@ -29,7 +28,7 @@ class PaymentController < ApplicationController
       credit_card.save!
     end
 
-    redirect_to root_path, notice: 'Compra efetuada com sucesso'
+    redirect_to summary_index_path(checkout_id: @checkout.id)
   end
 
   private
