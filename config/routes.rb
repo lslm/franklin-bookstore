@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :stocks
     resources :orders
     resources :return_requests
+    resources :business_analysis
   end
 
   get 'all-banners', to: 'banners#display'

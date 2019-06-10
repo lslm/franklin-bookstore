@@ -24,4 +24,21 @@ class Category < ApplicationRecord
       less_than: 10.megabytes 
     },
     if: Proc.new {|a| a.image.present? }
+  
+  def self.total_by_quantity
+    Category.find_by_sql(<<-SQL
+      select categories."name",
+      sum(order_items.quantity)
+      from products
+      join categories on products.id = categories.id
+      join stocks on stocks.product_id = products.id
+      join order_items on order_items.stock_id = stocks.id
+      group by categories."name"
+    SQL
+    ).map do |row|
+      [
+        row['name'], row['sum']
+      ]
+    end
+  end
 end
