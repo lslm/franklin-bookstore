@@ -19,7 +19,9 @@ class SummaryController < ApplicationController
     @checkout = Checkout.find(params[:checkout_id])
     update_stock
     @checkout.order.shipment_cost = @checkout.order.subtotal * 0.05
+    @checkout.status = :pending_confirmation
     @checkout.completed = true
+    @checkout.order.checkout_id = @checkout.id
     @checkout.save!
 
     mark_coupom_as_used
