@@ -12,8 +12,10 @@ class ReturnRequestsController < ApplicationController
 
     return_request.update(return_request_params)
 
-    create_coupom_for_user(return_request)
-    enter_product_to_stock(return_request)
+    if params[:status] = 'completed'
+      create_coupom_for_user(return_request)
+      enter_product_to_stock(return_request)
+    end
 
     redirect_to return_requests_path
   end
