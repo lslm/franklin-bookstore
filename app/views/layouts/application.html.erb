@@ -45,10 +45,12 @@
                 <% if current_user.admin %>
                   <%= link_to "Gerenciar produtos", products_path, class: 'dropdown-item' %>
                   <%= link_to "Gerenciar categorias", categories_path, class: 'dropdown-item' %>
+                  <%= link_to "Gerenciar base de usuários", manage_user_index_path, class: 'dropdown-item' %>
                   <%= link_to "Estoque", stocks_path, class: 'dropdown-item' %>
                   <%= link_to "Pedidos", orders_path, class: 'dropdown-item' %>
                   <%= link_to "Solicitações de troca", return_requests_path, class: 'dropdown-item' %>
                   <%= link_to "Análises de negócio", business_analysis_index_path, class: 'dropdown-item' %>
+                  <hr>
                 <% end %>
                 <%= link_to "Meus pedidos", checkouts_path, class: 'dropdown-item' %>
                 <%= link_to "Meus pedidos de troca", returns_path, class: 'dropdown-item' %>

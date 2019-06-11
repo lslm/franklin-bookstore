@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Gerenciar usuários</h1>
+  </div>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Primeiro nome</th>
+          <th scope="col">Último nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Data de cadastro</th>
+          <th scope="col">Administrador?</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.id, manage_user_path(user) %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at %></td>
+            <td><%= user.admin %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

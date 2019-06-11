@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+
+  </div>
+
+  <div class="card-body">
+    <p>Primeiro nome: <%= @user.first_name %></p>
+    <p>Último nome: <%= @user.last_name %></p>
+    <p>Email: <%= @user.email %></p>
+    <p>Data de cadastro: <%= @user.created_at %></p>
+    <p>Administrador: <%= @user.admin %></p>
+
+    <%= form_tag(manage_user_path(@user), method: "put") do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= check_box_tag :admin, @user.admin %>
+      <%= submit_tag "Alterar nível", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
