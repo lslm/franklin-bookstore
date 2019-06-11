@@ -56,7 +56,7 @@
         <h1>Atualizar status</h1>
         
         <%= simple_form_for @order, url: order_path(@order), method: :put do |f| %>
-          <%= f.select :status, [['Aguardando confirmação', 'waiting_for_confirmation'], ['Confirmado', 'confirmed'], ['Em trânsito', 'in_transit'], ['Entrege', 'delivered']] %>
+          <%= f.select :status, [['Aguardando confirmação', 'waiting_for_confirmation'], ['Confirmado', 'confirmed'], ['Em trânsito', 'in_transit'], ['Entregue', 'delivered']] %>
           <%= f.submit 'Update status' %>
         <% end %>
       </div>
