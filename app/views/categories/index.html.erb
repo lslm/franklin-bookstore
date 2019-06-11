@@ -1,10 +1,25 @@
-<div class="center">
-  <ul class="list-group mb-3">
-    <% @categories.each do |category| %>
-      <%= link_to category.name, category_path(category.id), class: 'list-group-item list-group-item-action' %>
-    <% end %>
-  </ul>
-</ul>
+<div class="card">
+  <div class="card-header">
+    <h1>Categorias</h1>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" colspan="2">Nome</th>
+        </tr>
+      </thead>
 
-  <%= link_to "New Category", new_category_path, class: "custom-button" %>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+            <td><%= link_to 'Editar', edit_category_path(category) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <hr>
+    <%= link_to "Cadastrar nova categoria", new_category_path, class: 'btn btn-primary' %>
+  </div>
 </div>

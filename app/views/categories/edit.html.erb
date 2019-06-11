@@ -1,5 +1,14 @@
-<h1>Editar categoria</h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Editar categoria</h1>
+  </div>
 
-<%= render "form" %>
+  <div class="card-body">
+    <%= render 'form' %>
+  </div>
 
-<%= link_to "Delete", @category, method: :delete, data: {confirm: "Are you sure?"} %>
+  <div class="card-footer">
+    <%= button_to 'Apagar', @category, method: :delete, class: 'btn btn-danger' %>
+  </div>
+</div>
+

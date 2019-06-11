@@ -1,5 +1,12 @@
-<%= simple_form_for @category, :html => { :multipart => true }, validate: true do |f| %>
-  <%= f.input :name %>
-  <%= f.input :image, as: :file %>
-  <%= f.submit %>
+<%= form_for @category, :html => { :multipart => true }, validate: true do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.label :name, 'Nome' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit 'Salvar', class: 'btn btn-primary' %>
 <% end %>
