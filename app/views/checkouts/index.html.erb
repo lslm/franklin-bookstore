@@ -1,19 +1,22 @@
-<div class="center">
-  <h1>Listing orders</h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Meus pedidos</h1>
+  </div>
 
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Date</th>
-      <th>Status</th>
-    </tr>
-    <% @checkouts.each do |checkout| %>
+  <div class="card-body">
+    <table class="table">
       <tr>
-        <td><%= link_to checkout.id, checkout_path(checkout) %></td>
-        <td><%= checkout.user.first_name %> <%= checkout.user.last_name %></td>
-        <td><%= checkout.created_at %></td>
-        <td><%= checkout.status %></td>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Status</th>
       </tr>
-    <% end %>
-  </table>
+      <% @checkouts.each do |checkout| %>
+        <tr>
+          <td><%= link_to checkout.id, checkout_path(checkout) %></td>
+          <td><%= checkout.created_at %></td>
+          <td><%= checkout.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

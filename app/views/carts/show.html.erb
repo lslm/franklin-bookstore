@@ -1,71 +1,63 @@
-<div class="row">
-  <div class="col center">
-    <div class="card">
-      <div class="card-header">
-        <h1>Shopping Cart</h1>
-      </div>
+<div class="card">
+  <div class="card-header">
+    <h1>Carrinho</h1>
+  </div>
 
-      <div class="card-body">
-        <% if !@order_item.nil? && @order_item.errors.any? %>
-          <div class="alert alert-danger">
-            <ul>
-            <% @order_item.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
+  <div class="card-body">
+    <% if !@order_item.nil? && @order_item.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+        <% @order_item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
-        
-        <% if @order_items.size == 0 %>
-          <div class="center text-center">
-            <p>There aren't any items in your shopping cart.</p>  
-            <p>Please <%= link_to "go back", items_path %> and add some items to your cart.</p>
-          </div>
-        <% else %>
-          <div class="cart">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Produto</th>
-                <th scope="col">Quantidade</th>
-                <th scope="col">Preço unitário</th>
-                <th scope="col">Preço total</th>
-                <th scope="col">Quantidade</th>
-              </tr>
-            </thead>
-            
-            <tbody>
-              <% @order_items.each do |order_item| %>
-                <tr>
-                  <td><%= order_item.stock.product.name %></td>
-                  <td><%= order_item.quantity %></td>
-                  <td><%= order_item.stock.price %></td>
-                  <td><%= order_item.quantity * order_item.stock.price %></td>
-                  <td>
-                    <%= form_for order_item, remote: true do |f| %>
-                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                      <%= f.hidden_field :item_id, value: order_item.stock.product.id %>
-                      <%= f.select :quantity, (1..order_item.stock.quantity), {}, value: order_item.quantity.to_i %>
-                      <%= button_to 'Alterar quantidade', class: 'btn btn-danger', method: :patch %>
-                    <% end %>
-                  </td>
-                  
-                  <td>
-                    <%= button_to '🗑', order_item, method: :delete, class: 'btn btn-outline-danger btn-sm', data: {confirm: 'Tem certeza?'} %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-            
-        
-            <div class="cart-finish">
-              <h3 class="cart-total">Total: <%= number_to_currency @order.subtotal %></h3>
-              <%= link_to "Checkout Now", new_billing_address_path(order_id: @order.id), class: "custom-button" %>
-            </div>
-          </div>
-        <% end %>
+        </ul>
       </div>
-    </div>
+    <% end %>
+    
+    <% if @order_items.size == 0 %>
+      <div class="center text-center">
+        <p>Você não adicionou nenhum item no carrinho</p>  
+        <p>Por favor <%= link_to "retorne", shop_items_path %> e escolha alguns livros</p>
+      </div>
+    <% else %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Produto</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Preço unitário</th>
+            <th scope="col">Preço total</th>
+            <th scope="col">Quantidade</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @order_items.each do |order_item| %>
+            <tr>
+              <td><%= order_item.stock.product.name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= order_item.stock.price %></td>
+              <td><%= order_item.quantity * order_item.stock.price %></td>
+              <td>
+                <%= form_for order_item, remote: true do |f| %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <%= f.hidden_field :item_id, value: order_item.stock.product.id %>
+                  <%= f.select :quantity, (1..order_item.stock.quantity), {}, value: order_item.quantity.to_i %>
+                  <%= button_to 'Alterar quantidade', class: 'btn btn-danger', method: :patch %>
+                <% end %>
+              </td>
+              
+              <td>
+                <%= button_to '🗑', order_item, method: :delete, class: 'btn btn-outline-danger btn-sm', data: {confirm: 'Tem certeza?'} %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <hr>
+
+    <%= link_to "Finalizar compras", new_billing_address_path(order_id: @order.id), class: "btn btn-success" %>
   </div>
 </div>

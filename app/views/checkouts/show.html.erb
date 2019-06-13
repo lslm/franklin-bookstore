@@ -1,27 +1,35 @@
-<div class="center">
-  <h3>Status: <%= @checkout.status %></h3>
+<div class="card">
+  <div class="card-header">
+    Pedido número <strong><%= @checkout.id %></strong>
+  </div>
 
-  <h5>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h5>
-  <h5>Custo de envio <%= number_to_currency(@checkout.order.shipment_cost) %></h5>
+  <div class="card-body">
+    <h3>Status: <%= @checkout.status %></h3>
+    <hr>
+    <h5>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h5>
+    <h5>Custo de envio: <%= number_to_currency(@checkout.order.shipment_cost) %></h5>
 
-  <table>
-    <tr>
-      <th>Item</th>
-      <th>Quantity</th>
-      <th>Unit price</th>
-      <th>Total</th>
-      <th>Ação</th>
-    </tr>
-    <% @checkout.order.order_items.each do |order_item| %>
+    <hr>
+
+    <table class="table">
       <tr>
-        <td><%= order_item.stock.product.name %></td>
-        <td><%= order_item.quantity %></td>
-        <td><%= number_to_currency(order_item.unit_price) %></td>
-        <td><%= number_to_currency(order_item.total_price) %></td>
-        <td>
-          <%= link_to 'Solicitar troca', new_return_path(stock_id: order_item.stock_id, quantity: order_item.quantity) %>
-        </td>
+        <th>Item</th>
+        <th>Quantidade</th>
+        <th>Preço unitário</th>
+        <th>Total</th>
+        <th>Ação</th>
       </tr>
-    <% end %>
-  </table>
+      <% @checkout.order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.stock.product.name %></td>
+          <td><%= order_item.quantity %></td>
+          <td><%= number_to_currency(order_item.unit_price) %></td>
+          <td><%= number_to_currency(order_item.total_price) %></td>
+          <td>
+            <%= link_to 'Solicitar troca', new_return_path(stock_id: order_item.stock_id, quantity: order_item.quantity) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
