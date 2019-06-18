@@ -5,16 +5,18 @@
 
   <div class="card-body">
     <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+    <div id="linechart_material" style="width: 900px; height: 500px"></div>
   </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['corechart']});
+  google.charts.load('current', {'packages':['corechart', 'line']});
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
-
+    // Piechart
     var data = JSON.parse('<%= @data.to_json.html_safe -%>');
     data = [['Categoria', 'Quantidade']].concat(data);
     data = google.visualization.arrayToDataTable(data);
@@ -26,5 +28,28 @@
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
     chart.draw(data, options);
+
+    // Linechart
+    var dataLineChart = new google.visualization.DataTable();
+    dataLineChart.addColumn('string', 'Dia');
+    <% @books.each do |book| %>
+      dataLineChart.addColumn('number', '<%= book %>');
+    <% end %>
+
+    dataLineChart.addRows(<%= @line_chart_data.to_json.html_safe %>);
+
+    var options = {
+      chart: {
+        title: 'Quantidade de livros vendidos por dia'
+      },
+      width: 900,
+      height: 500
+    };
+
+    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+    chart.draw(dataLineChart, google.charts.Line.convertOptions(options));
+
   }
+  
 </script>
