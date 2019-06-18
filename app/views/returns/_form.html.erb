@@ -1,8 +1,8 @@
   <%= simple_form_for @return, :html => { multipart: true } do |f| %>
     <%= f.hidden_field :stock_id, value: @stock.id %>
 
-    <%= f.input :return_reason %>
-    <%= f.select :quantity, (1..@quantity_available.to_i) %>
+    <%= f.input :return_reason, class: 'form-control' %>
+    <p>Quantidade: <%= f.select :quantity, (1..@quantity_available.to_i) %></p>
 
-    <%= f.submit 'Salvar' %>
+    <%= f.submit 'Salvar', class: 'btn btn-success' %>
   <% end %>

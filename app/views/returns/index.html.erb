@@ -1,25 +1,29 @@
-<div class="center">
-  <h1>Solicitações de devolução</h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Solicitações de devolução</h1>
+  </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Data</th>
-        <th scope="col">Produto</th>
-        <th scope="col">Status</th>
-        <th scope="col">Ação</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-      <% @returns.each do |return_request| %>
+  <div class="card-body">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= return_request.created_at%></td>
-          <td><%= return_request.stock.product.name %></td>
-          <td><%= return_request.status %></td>
-          <td><%= link_to 'Visualizar', return_path(return_request) %></td>
+          <th scope="col">Data</th>
+          <th scope="col">Produto</th>
+          <th scope="col">Status</th>
+          <th scope="col">Ação</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      
+      <tbody>
+        <% @returns.each do |return_request| %>
+          <tr>
+            <td><%= return_request.created_at%></td>
+            <td><%= return_request.stock.product.name %></td>
+            <td><%= return_request.status %></td>
+            <td><%= link_to 'Visualizar', return_path(return_request) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

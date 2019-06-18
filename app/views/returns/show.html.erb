@@ -1,4 +1,10 @@
-<h1>Solicitação de troca do produto <%= @return_request.stock.product.name %></h1>
+<div class="card">
+  <div class="card-header">
+    <h1>Solicitação de troca do produto <%= @return_request.stock.product.name %></h1>
+  </div>
 
-<p>Data de solicitação: <%= @return_request.created_at %></p>
-<p>Status: <%= @return_request.status %></p>
+  <div class="card-body">
+    <p>Data de solicitação: <%= @return_request.created_at %></p>
+    <p>Status: <%= @return_request.status %></p>
+  </div>
+</div>
