@@ -6,7 +6,11 @@ class SummaryController < ApplicationController
     if @coupom
       @total_to_pay = @checkout.total - @coupom.value
       @checkout.order.coupom_code = @coupom.code
-      @checkout.order.subtotal = @total_to_pay
+      if @total_to_pay > 0
+        @checkout.order.subtotal = @total_to_pay
+      else
+        @checkout.order.subtotal = 0
+      end
       @checkout.save!
     else
       @total_to_pay = @checkout.total
@@ -25,6 +29,16 @@ class SummaryController < ApplicationController
     @checkout.save!
 
     mark_coupom_as_used
+
+    @coupom = current_user.coupoms.find_by(code: @checkout.order.coupom_code) if @checkout.order.coupom_code
+
+    if @coupom && (@checkout.order.subtotal - @coupom.value) < 0
+      coupom_value = (@checkout.total - @coupom.value) * -1
+      user = current_user
+      code = rand(36**6).to_s(36)
+
+      Coupom.create!(user: user, code: code, value: coupom_value, used: false)
+    end
 
     # clear cart
     session.delete(:order_id)
