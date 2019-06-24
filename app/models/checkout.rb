@@ -1,6 +1,7 @@
 class Checkout < ApplicationRecord
   belongs_to :user
   belongs_to :order, autosave: true
+  has_many :checkout_credit_cards
 
   def total
     self.order.order_items.pluck(:total_price).reduce(:+)

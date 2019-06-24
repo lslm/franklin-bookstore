@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_041824) do
+ActiveRecord::Schema.define(version: 2019_06_24_182616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,13 +50,6 @@ ActiveRecord::Schema.define(version: 2019_06_03_041824) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "banners", id: :serial, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.string "name"
-  end
-
   create_table "categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -66,6 +59,17 @@ ActiveRecord::Schema.define(version: 2019_06_03_041824) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "checkout_credit_cards", force: :cascade do |t|
+    t.bigint "checkout_id"
+    t.string "number"
+    t.string "name"
+    t.string "expire"
+    t.string "cvc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checkout_id"], name: "index_checkout_credit_cards_on_checkout_id"
   end
 
   create_table "checkouts", id: :serial, force: :cascade do |t|
@@ -277,6 +281,8 @@ ActiveRecord::Schema.define(version: 2019_06_03_041824) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "checkout_credit_cards", "checkouts"
+  add_foreign_key "coupoms", "users", name: "fk_coupoms_users"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "items", "products"
   add_foreign_key "items", "stocks"

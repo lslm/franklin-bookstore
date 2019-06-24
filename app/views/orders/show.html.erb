@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
-        <h3>Subtotal: <%= number_to_currency(@order.order.subtotal) %></h3>
+        <h3>Subtotal: <%= number_to_currency(@order.order.subtotal) %> (dividido igualmente em <%= @order.checkout_credit_cards.count %> cartões de crédito)</h3>
     
         <table>
           <tr>
@@ -47,10 +47,13 @@
       
         <div>
           <h3>Cartão para pagamento</h3>
-          <p>Credit card number: <%= @order.credit_card_number %></p>
-          <p>Credit card name: <%= @order.credit_card_name %></p>
-          <p>Credit card expire date: <%= @order.credit_card_expire_date %></p>
-          <p>Credit card CCV: <%= @order.credit_card_ccv %></p>
+          <% @order.checkout_credit_cards.each do |credit_card| %>
+            Número: <%= credit_card.number %><br>
+            Nome: <%= credit_card.name %><br>
+            CCV: <%= credit_card.cvc %><br>
+            Validade: <%= credit_card.expire %><br>
+            <hr>
+          <% end %>
         </div>
       
         <h1>Atualizar status</h1>

@@ -34,7 +34,7 @@
     <% if @coupom %>
       Desconto: <%= @coupom.value %><br>
     <% end %>
-    Preço a pagar: <%= @checkout.order.subtotal %>
+    Preço a pagar: <%= @checkout.order.subtotal %> (dividido igualmente em <%= @checkout.checkout_credit_cards.count %> cartões de crédito)
 
     <hr>
 
@@ -63,10 +63,13 @@
     Estado: <%= @checkout.shipping_state %><br>
 
     <h2>Pagamento</h2>
-    Número: <%= @checkout.credit_card_number %><br>
-    Nome: <%= @checkout.credit_card_name %><br>
-    CCV: <%= @checkout.credit_card_ccv %><br>
-    Validade: <%= @checkout.credit_card_expire_date %><br>
+    <% @checkout.checkout_credit_cards.each do |credit_card| %>
+      Número: <%= credit_card.number %><br>
+      Nome: <%= credit_card.name %><br>
+      CCV: <%= credit_card.cvc %><br>
+      Validade: <%= credit_card.expire %><br>
+      <hr>
+    <% end %>
 
     <hr>
 

@@ -6,7 +6,7 @@
   <div class="card-body">
     <h3>Status: <%= @checkout.status %></h3>
     <hr>
-    <h5>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %></h5>
+    <h5>Subtotal: <%= number_to_currency(@checkout.order.subtotal) %> (dividido igualmente em <%= @checkout.checkout_credit_cards.count %> cartões de crédito)</h5>
     <h5>Custo de envio: <%= number_to_currency(@checkout.order.shipment_cost) %></h5>
 
     <hr>
@@ -31,5 +31,30 @@
         </tr>
       <% end %>
     </table>
+
+    <hr>
+
+    <h2>Endereço de cobrança</h2>
+    Endereço: <%= @checkout.billing_address %><br>
+    Número: <%= @checkout.billing_number %><br>
+    CEP: <%= @checkout.billing_zip %><br>
+    Cidade: <%= @checkout.billing_suburb %><br>
+    Estado: <%= @checkout.billing_state %><br>
+    
+    <h2>Endereço de entrega</h2>
+    Endereço: <%= @checkout.shipping_address %><br>
+    Número: <%= @checkout.shipping_number %><br>
+    CEP: <%= @checkout.shipping_zip %><br>
+    Cidade: <%= @checkout.shipping_suburb %><br>
+    Estado: <%= @checkout.shipping_state %><br>
+
+    <h2>Pagamento</h2>
+    <% @checkout.checkout_credit_cards.each do |credit_card| %>
+      Número: <%= credit_card.number %><br>
+      Nome: <%= credit_card.name %><br>
+      CCV: <%= credit_card.cvc %><br>
+      Validade: <%= credit_card.expire %><br>
+      <hr>
+    <% end %>
   </div>
 </div>
