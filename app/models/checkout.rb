@@ -6,8 +6,8 @@ class Checkout < ApplicationRecord
     self.order.order_items.pluck(:total_price).reduce(:+)
   end
 
-  def self.count_items_sold
-    data = Checkout.find_by_sql(<<-SQL
+  def self.count_items_sold(initial_date, end_date)
+    query = <<-SQL
       select TO_CHAR(checkouts.created_at :: DATE, 'dd/mm/yyyy') as date,
       products."name",
       sum(order_items.quantity) as quantity
@@ -15,9 +15,11 @@ class Checkout < ApplicationRecord
       join order_items on order_items.order_id = checkouts.order_id
       join stocks on stocks.id = order_items.stock_id
       join products on products.id = stocks.product_id
-      group by 1,2
     SQL
-    ).map do |row|
+
+    query = "#{query} #{build_query_condition(initial_date, end_date)} group by 1,2"
+
+    data = Checkout.find_by_sql(query).map do |row|
       {dia: row['date'], nome: row['name'], quantidade: row['quantity']}
     end
 
@@ -44,5 +46,20 @@ class Checkout < ApplicationRecord
         0
       end
     end
+  end
+
+  def self.build_query_condition(initial_date, end_date)
+    condition = ""
+    return condition if initial_date.nil? && end_date.nil?
+
+    if !initial_date.empty?
+      condition = "WHERE checkouts.created_at >= '#{initial_date}'::date"
+    end
+
+    if !end_date.empty?
+      condition = "#{condition} AND checkouts.created_at < ('#{end_date}'::date + '1 day'::interval)"
+    end
+
+    condition
   end
 end

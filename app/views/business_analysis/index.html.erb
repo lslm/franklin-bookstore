@@ -4,9 +4,20 @@
   </div>
 
   <div class="card-body">
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <%= form_tag("/admin/business_analysis", method: "get") do %>
+      <%= label_tag(:initial_date, "De") %>
+      <%= date_field_tag(:initial_date) %>
+
+      <%= label_tag(:end_date, "Até") %>
+      <%= date_field_tag(:end_date) %>
+
+      <%= submit_tag("Aplicar filtro") %>
+    <% end %>
+
+    <hr>
 
     <div id="linechart_material" style="width: 900px; height: 500px"></div>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
   </div>
 </div>
 
