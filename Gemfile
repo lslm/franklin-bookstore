@@ -21,7 +21,6 @@ gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'omniauth-facebook'
 gem 'will_paginate', '~> 3.1.0'
-gem 'aws-sdk'
 gem 'mail_form'
 gem 'bootstrap', '~> 4.3.1'
 

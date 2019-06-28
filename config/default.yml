@@ -21,17 +21,6 @@ development:
   # Google Analytics
   ECOMMERCE_GOOGLE_ANALYTICS_CODE: 'UA-xxxxxxxx-x'
 
-  # AWS S3
-  S3_BUCKET_NAME: 's3_bucket_name'
-  AWS_ACCESS_KEY_ID: 'aws_access_key_id'
-  AWS_SECRET_ACCESS_KEY: 'aws_secret_access_key'
-  AWS_REGION: 'aws_region'
-
-  # Stripe
-  # Can change for testing/production
-  # i.e. test: sk_test_xxx prod: sk_live_xxx
-  STRIPE_API_KEY: 'sk_test_xxxxxx'
-
 test:
   # PostgreSQL
   POSTGRESQL_USERNAME: <%= ENV['POSTGRESQL_USERNAME'] %>
@@ -45,7 +34,3 @@ production:
   ECOMMERCE_GMAIL_PASSWORD: 'myPassword123'
   ECOMMERCE_GOOGLE_ANALYTICS_CODE: 'UA-xxxxxxxx-x'
   S3_BUCKET_NAME: 's3_bucket_name'
-  AWS_ACCESS_KEY_ID: 'aws_access_key_id'
-  AWS_SECRET_ACCESS_KEY: 'aws_secret_access_key'
-  AWS_REGION: 'aws_region'
-  STRIPE_API_KEY: 'sk_live_xxxxxx'
