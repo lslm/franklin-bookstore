@@ -99,17 +99,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.active_storage.service = :amazon
-  
-  # Paperclip AWS
-  config.paperclip_defaults = {
-    storage: :s3,
-    preserve_files: true,
-    s3_credentials: {
-      bucket: Rails.configuration.default['S3_BUCKET_NAME'],
-      access_key_id: Rails.configuration.default['AWS_ACCESS_KEY_ID'],
-      secret_access_key: Rails.configuration.default['AWS_SECRET_ACCESS_KEY'],
-      s3_region: Rails.configuration.default['AWS_REGION'],
-      s3_host_name: 's3-ap-southeast-2.amazonaws.com'
-    }
-  }
 end

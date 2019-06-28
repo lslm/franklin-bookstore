@@ -8,27 +8,6 @@ class Picture < ApplicationRecord
     thumb: "100x" 
   }
 
-  has_attached_file :image, 
-    styles: -> (image) { image.instance.styles }, 
-    :url => "/pictures/:imageable_type/:id/:style/:filename", 
-    :path => ":rails_root/public/pictures/:imageable_type/:id/:style/:filename",
-    :convert_options => {
-      :original => "-strip",
-      :product => "-strip",
-      :grid => "-strip",
-      :thumb => "-quality 75 -strip" 
-    },
-    default_url: "/images/missing.png"
-
-  validates_attachment :image, 
-    presence: true,
-    content_type: { 
-      content_type: ["image/jpeg", "image/jpg", "image/png"] 
-    },
-    size: {
-      less_than: 1.megabytes 
-    }
-
   # Workaround to pickup styles from imageable model(s)
   # Paperclip starts processing before all attributes are in the model
   # So we start processing after saving
