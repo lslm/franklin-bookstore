@@ -33,4 +33,3 @@ production:
   ECOMMERCE_GMAIL_USERNAME: 'hello@gmail.com'
   ECOMMERCE_GMAIL_PASSWORD: 'myPassword123'
   ECOMMERCE_GOOGLE_ANALYTICS_CODE: 'UA-xxxxxxxx-x'
-  S3_BUCKET_NAME: 's3_bucket_name'

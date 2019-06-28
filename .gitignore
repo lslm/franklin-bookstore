@@ -22,3 +22,5 @@
 # Ignore seed images, can provide own
 /db/seed/images
 /storage/
+# Ignore master key for decrypting credentials and more.
+/config/master.key
