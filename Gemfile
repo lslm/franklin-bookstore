@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.2.0'
-gem 'pg', '~> 0.18'
+gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -17,7 +17,6 @@ gem 'feature'
 
 gem 'simple_form'
 gem 'devise'
-gem "paperclip", "~> 6.0.0"
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 gem 'omniauth-facebook'
