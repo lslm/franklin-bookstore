@@ -5,3 +5,10 @@ local:
 test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
+
+amazon:
+  service: S3
+  access_key_id: "<%= ENV.fetch("AWS_ACCESS_KEY_ID") { 5 } %>"
+  secret_access_key: "<%= ENV.fetch("AWS_SECRET_ACCESS_KEY") { 5 } %>"
+  region: "us-east-1"
+  bucket: "franklin-bookstore"

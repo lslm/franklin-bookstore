@@ -24,6 +24,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'mail_form'
 gem 'bootstrap', '~> 4.3.1'
 
+gem "aws-sdk-s3", require: false
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.6'
