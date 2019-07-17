@@ -2,38 +2,50 @@ class CategoriesController < ApplicationController
   before_action :authorize_admin
 
   def index
-    @categories = IndexCommand.new.execute
+    @categories = Category.all.order('created_at ASC')
   end
 
   def new
     @category = current_user.categories.build
   end
 
-  def create
-    CreateCommand.new.execute(categories_params)
+  def show
+    @category = Category.find(params[:id])
+  end
 
-    redirect_to categories_path
+  def create
+    @category = current_user.categories.build(categories_params)
+
+    if @category.save
+      redirect_to categories_path
+    else
+      render 'new'
+    end
   end
 
   def edit
-    @category = ShowCommand.new.execute(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def update
-    category = Category.find(params[:id])
-    UpdateCommand.new.execute(category.id, categories_params)
+    @category = Category.find(params[:id])
 
-    redirect_to categories_path
+    if @category.update(categories_params)
+      redirect_to categories_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    DestroyCommand.new.execute(params[:id])
+    @category = Category.find(params[:id])
+    @category.destroy
     redirect_to categories_path
   end
 
   private
 
   def categories_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :image, :user_id)
   end
 end
