@@ -1,0 +1,31 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'lib/**/*'
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - config/routes.rb
+    - test/**/*
+  Max: 120
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 35
+
+Metrics/PerceivedComplexity:
+  Max: 10

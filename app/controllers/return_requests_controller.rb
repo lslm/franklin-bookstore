@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReturnRequestsController < ApplicationController
   def index
     @return_requests = Return.all

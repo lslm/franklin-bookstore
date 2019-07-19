@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BillingAddressController < ApplicationController
   def new
     @checkout = Checkout.new

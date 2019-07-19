@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveDetailFieldsFromOrders < ActiveRecord::Migration[5.0]
   def change
     remove_column :orders, :first_name, :string

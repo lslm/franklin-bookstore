@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSlugToCheckouts < ActiveRecord::Migration[5.0]
   def change
     add_column :checkouts, :slug, :string, null: false

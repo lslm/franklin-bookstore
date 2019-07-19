@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentController < ApplicationController
   def new
     @checkout = Checkout.find(params[:checkout_id])

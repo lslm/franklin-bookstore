@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCheckouts < ActiveRecord::Migration[5.0]
   def change
     create_table :checkouts do |t|
@@ -8,7 +10,7 @@ class CreateCheckouts < ActiveRecord::Migration[5.0]
       t.integer :zip
       t.string :state
       t.string :phone
-      t.decimal :total, :precision => 8, :scale => 2
+      t.decimal :total, precision: 8, scale: 2
       t.integer :user_id
       t.integer :order_id
 

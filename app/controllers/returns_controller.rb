@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReturnsController < ApplicationController
   def index
     @returns = current_user.returns.all

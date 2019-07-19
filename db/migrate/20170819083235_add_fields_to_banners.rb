@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AddFieldsToBanners < ActiveRecord::Migration[5.0]
   def change
-  	add_column :banners, :name, :string
+    add_column :banners, :name, :string
   end
 end

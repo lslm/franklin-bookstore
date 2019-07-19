@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AddPicturesToProducts < ActiveRecord::Migration[5.0]
   def change
-  	add_column :products, :pictures, :text, array:true, default: []
+    add_column :products, :pictures, :text, array: true, default: []
   end
 end

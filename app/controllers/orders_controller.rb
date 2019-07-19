@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
-  before_action :authorize, only: [:index, :show]
-  before_action :authorize_admin, only: [:index, :edit]
+  before_action :authorize, only: %i[index show]
+  before_action :authorize_admin, only: %i[index edit]
 
   def index
-    @orders = Checkout.where(completed: true).order("created_at DESC")
+    @orders = Checkout.where(completed: true).order('created_at DESC')
   end
 
   def show

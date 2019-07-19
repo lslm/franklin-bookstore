@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CheckoutsController < ApplicationController
   before_action :find_checkout, only: [:show]
-  before_action :find_order, only: [:new, :create]
+  before_action :find_order, only: %i[new create]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -23,49 +25,47 @@ class CheckoutsController < ApplicationController
   end
 
   def create
+    redirect_to root_path, notice: 'Não nenhuma ordem criada para a sessão' if @order.blank?
+
     @checkout = Checkout.new(checkouts_params)
     @checkout.status = 'waiting_confirmation'
     @coupom = Coupom.find_by_code(params[:coupom_code])
 
-    if @order.present?
-      @order.coupom_code = @coupom.code if @coupom
+    @order.coupom_code = @coupom.code if @coupom
 
-      @checkout.set_gst(@order.subtotal, @order.gst)
-      @checkout.order_id = @order.id
+    @checkout.set_gst(@order.subtotal, @order.gst)
+    @checkout.order_id = @order.id
 
-      @order.shipment_cost = @order.subtotal * 0.05
+    @order.shipment_cost = @order.subtotal * 0.05
 
-      @order.save!
+    @order.save!
 
-      if current_user
-        @checkout.user_id = current_user.id
-      end
+    @checkout.user_id = current_user.id if current_user
 
-      respond_to do |format|
-        if @checkout.save
-          update_stock
+    respond_to do |format|
+      if @checkout.save
+        update_stock
 
-          session.delete(:order_id)
-          session[:checkout_id] = @checkout.id
-  
-          # Creates a new order for the customer when they checkout
-          # Saves old order record, which is referred to by the checkout record
-          if current_user
-            order = Order.new(user_id: current_user.id)
-          else
-            order = Order.new
-          end
-          order.save
-          format.html { redirect_to checkouts_path, notice: 'Entrada de estoque criada com sucesso' }
-        else
-          format.html { render :new }
-        end
+        session.delete(:order_id)
+        session[:checkout_id] = @checkout.id
+
+        # Creates a new order for the customer when they checkout
+        # Saves old order record, which is referred to by the checkout record
+        order = if current_user
+                  Order.new(user_id: current_user.id)
+                else
+                  Order.new
+                end
+        order.save
+        format.html { redirect_to checkouts_path, notice: 'Entrada de estoque criada com sucesso' }
+      else
+        format.html { render :new }
       end
     end
   end
 
   def update
-    coupom = Coupom.find_by_code(checkouts_params[:coupom_code])
+    Coupom.find_by_code(checkouts_params[:coupom_code])
   end
 
   private

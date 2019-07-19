@@ -1,29 +1,31 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  it "has a valid factory" do
+  it 'has a valid factory' do
     expect(FactoryBot.build(:product)).to be_valid
   end
-  
-  it "is invalid without a name" do
+
+  it 'is invalid without a name' do
     expect(FactoryBot.build(:product, name: nil)).to be_invalid
   end
-  
-  it "is invalid without a description" do
+
+  it 'is invalid without a description' do
     expect(FactoryBot.build(:product, description: nil)).to be_invalid
   end
-  
-  it "is invalid without a price" do
+
+  it 'is invalid without a price' do
     expect(FactoryBot.build(:product, price: nil)).to be_invalid
   end
-  
+
   it { should have_many(:order_items) }
   it { should have_many(:pictures).dependent(:delete_all) }
   it { should belong_to(:category) }
   it { should belong_to(:user) }
-  
-  context "db" do
-    context "columns" do
+
+  context 'db' do
+    context 'columns' do
       it { should have_db_column(:name).of_type(:string) }
       it { should have_db_column(:description).of_type(:text) }
       it { should have_db_column(:price).of_type(:decimal).with_options(precision: 8, scale: 2) }
@@ -36,14 +38,14 @@ RSpec.describe Product, type: :model do
       it { should have_db_column(:user_id).of_type(:integer) }
     end
   end
-  
-  context "attributes" do
-    it "has name" do 
-      expect(FactoryBot.build(:product, name: "Product ABC123")).to have_attributes(name: "Product ABC123")
+
+  context 'attributes' do
+    it 'has name' do
+      expect(FactoryBot.build(:product, name: 'Product ABC123')).to have_attributes(name: 'Product ABC123')
     end
   end
-  
-  context "validation" do
+
+  context 'validation' do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:name) }
   end

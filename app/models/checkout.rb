@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Checkout < ApplicationRecord
   belongs_to :user
   belongs_to :order, autosave: true
   has_many :checkout_credit_cards
 
   def total
-    self.order.order_items.pluck(:total_price).reduce(:+)
+    order.order_items.pluck(:total_price).reduce(:+)
   end
 
   def self.count_items_sold(initial_date, end_date)
@@ -21,10 +23,10 @@ class Checkout < ApplicationRecord
     query = "#{query} #{build_query_condition(initial_date, end_date)} group by 1,2"
 
     data = Checkout.find_by_sql(query).map do |row|
-      {dia: row['date'], nome: row['name'], quantidade: row['quantity']}
+      { dia: row['date'], nome: row['name'], quantidade: row['quantity'] }
     end
 
-    data = data.group_by { |i| i[:dia]}.to_a
+    data = data.group_by { |i| i[:dia] }.to_a
 
     data.map do |d|
       [d[0]] + formalize_data(d)
@@ -35,7 +37,7 @@ class Checkout < ApplicationRecord
     books = Product.order(:name).pluck(:name)
 
     sold_books = data[1].map do |item|
-      {item[:nome] => item[:quantidade]}
+      { item[:nome] => item[:quantidade] }
     end
 
     sold_books = sold_books.inject(:merge)
@@ -50,16 +52,12 @@ class Checkout < ApplicationRecord
   end
 
   def self.build_query_condition(initial_date, end_date)
-    condition = ""
+    condition = ''
     return condition if initial_date.nil? && end_date.nil?
 
-    if !initial_date.empty?
-      condition = "WHERE checkouts.created_at >= '#{initial_date}'::date"
-    end
+    condition = "WHERE checkouts.created_at >= '#{initial_date}'::date" unless initial_date.empty?
 
-    if !end_date.empty?
-      condition = "#{condition} AND checkouts.created_at < ('#{end_date}'::date + '1 day'::interval)"
-    end
+    condition = "#{condition} AND checkouts.created_at < ('#{end_date}'::date + '1 day'::interval)" unless end_date.empty?
 
     condition
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
   has_many :products
   belongs_to :user
@@ -14,7 +16,7 @@ class Category < ApplicationRecord
       join order_items on order_items.stock_id = stocks.id
       group by categories."name"
     SQL
-    ).map do |row|
+                        ).map do |row|
       [
         row['name'], row['sum']
       ]
