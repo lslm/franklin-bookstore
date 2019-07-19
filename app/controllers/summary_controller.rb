@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SummaryController < ApplicationController
   def index
     @checkout = Checkout.find(params[:checkout_id])
@@ -6,17 +8,17 @@ class SummaryController < ApplicationController
     if @coupom
       @total_to_pay = @checkout.total - @coupom.value
       @checkout.order.coupom_code = @coupom.code
-      if @total_to_pay > 0
-        @checkout.order.subtotal = @total_to_pay
-      else
-        @checkout.order.subtotal = 0
-      end
-      @checkout.save!
+      @checkout.order.subtotal = if @total_to_pay.positive?
+                                   @total_to_pay
+                                 else
+                                   0
+                                 end
     else
       @total_to_pay = @checkout.total
       @checkout.order.subtotal = @total_to_pay
-      @checkout.save!
     end
+
+    @checkout.save!
   end
 
   def create
@@ -32,7 +34,7 @@ class SummaryController < ApplicationController
 
     @coupom = current_user.coupoms.find_by(code: @checkout.order.coupom_code) if @checkout.order.coupom_code
 
-    if @coupom && (@checkout.order.subtotal - @coupom.value) < 0
+    if @coupom && (@checkout.order.subtotal - @coupom.value).negative?
       coupom_value = (@checkout.total - @coupom.value) * -1
       user = current_user
       code = rand(36**6).to_s(36)
@@ -62,6 +64,6 @@ class SummaryController < ApplicationController
   def mark_coupom_as_used
     coupom = Coupom.find_by(code: @checkout.order.coupom_code)
     coupom.used = true if coupom
-    coupom.save! if coupom
+    coupom&.save!
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStocks < ActiveRecord::Migration[5.2]
   def change
     create_table :stocks do |t|
@@ -10,4 +12,3 @@ class CreateStocks < ActiveRecord::Migration[5.2]
     end
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   before_action :authorize
   before_action :authorize_admin
@@ -22,7 +24,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -38,7 +40,7 @@ class ProductsController < ApplicationController
     if @product.update(products_params)
       redirect_to products_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -48,7 +50,7 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
-	private
+  private
 
   def products_params
     params.require(:product).permit(
@@ -67,6 +69,7 @@ class ProductsController < ApplicationController
       :barcode,
       :active,
       :activation_reason,
-      images: [])
+      images: []
+    )
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderItem < ApplicationRecord
   belongs_to :stock
   belongs_to :order
@@ -20,17 +22,14 @@ class OrderItem < ApplicationRecord
     unit_price * quantity
   end
 
-private
+  private
+
   def product_present
-    if stock.product.nil?
-      errors.add(:product, "is not valid or is not active.")
-    end
+    errors.add(:product, 'is not valid or is not active.') if stock.product.nil?
   end
 
   def order_present
-    if order.nil?
-      errors.add(:order, "is not a valid order.")
-    end
+    errors.add(:order, 'is not a valid order.') if order.nil?
   end
 
   def finalize

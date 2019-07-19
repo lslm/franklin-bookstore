@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ShippingAddressController < ApplicationController
   def new
     @checkout = Checkout.find(params[:checkout_id])
@@ -32,7 +34,6 @@ class ShippingAddressController < ApplicationController
 
     redirect_to new_payment_path(checkout_id: @checkout.id)
   end
-
 
   private
 

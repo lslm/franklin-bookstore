@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -26,12 +28,10 @@ class ApplicationController < ActionController::Base
   private
 
   def authorize
-		redirect_to root_path if current_user.nil?
+    redirect_to root_path if current_user.nil?
   end
 
   def authorize_admin
-		if (current_user.nil?) || (not current_user.admin)
-			redirect_to root_path
-		end
+    redirect_to root_path if current_user.nil? || !current_user.admin
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ManageUserController < ApplicationController
   def index
     @users = User.all.order(:created_at)

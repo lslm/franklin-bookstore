@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "shop_items#index"
+  root 'shop_items#index'
 
   devise_for :users, controllers: { registrations: 'registrations' }
   scope :users do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :items
   resource :cart, only: [:show]
-  resources :order_items, only: [:create, :update, :destroy]
+  resources :order_items, only: %i[create update destroy]
 
   resources :checkouts
   resources :coupoms

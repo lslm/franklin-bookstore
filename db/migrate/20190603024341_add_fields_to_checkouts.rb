@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFieldsToCheckouts < ActiveRecord::Migration[5.2]
   def change
     add_column :checkouts, :billing_number, :string

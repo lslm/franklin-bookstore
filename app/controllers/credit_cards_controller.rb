@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditCardsController < ApplicationController
   def new
     @credit_card = current_user.credit_cards.build
@@ -8,7 +10,7 @@ class CreditCardsController < ApplicationController
 
     respond_to do |format|
       if @credit_card.save
-        format.html { redirect_to edit_user_registration_path, notice: 'Cartão de crédito salvo com sucesso', anchor: 'credit-cards' }
+        format.html { redirect_to edit_user_registration_path, notice: 'Cartão de crédito salvo com sucesso' }
       else
         format.html { render action: 'new' }
       end
@@ -23,7 +25,7 @@ class CreditCardsController < ApplicationController
     @credit_card = current_user.credit_cards.find(params[:id])
 
     if @credit_card.update(credit_card_params)
-      redirect_to edit_user_registration_path, notice: 'Dados de cartão de crédito atualizados', anchor: 'credit-cards'
+      redirect_to edit_user_registration_path, notice: 'Dados de cartão de crédito atualizados'
     else
       render action: 'edit'
     end
@@ -32,7 +34,7 @@ class CreditCardsController < ApplicationController
   def destroy
     credit_card = current_user.credit_cards.find(params[:id])
     credit_card.destroy!
-    redirect_to edit_user_registration_path, notice: 'Cartão apagado', anchor: 'credit-cards'
+    redirect_to edit_user_registration_path, notice: 'Cartão apagado'
   end
 
   private
