@@ -7,3 +7,4 @@
 //= require maps
 //= require misc
 //= require off-canvas
+//= require font-awesome-all
