@@ -15,34 +15,21 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-4">
-      <b><%= link_to "BookStore", root_path, class: 'navbar-brand' %></b>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "BookStore", root_path, class: "navbar-brand" %>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="navbar-collapse collapse justify-content-stretch" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Produtos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.all.each do |category| %>
-                <%= link_to category.name, products_path(category: category.name), class: 'dropdown-item' %>
-              <% end %>
-            </div>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Você
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% if user_signed_in? %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.first_name %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% if current_user.admin %>
                   <%= link_to "Gerenciar produtos", products_path, class: 'dropdown-item' %>
                   <%= link_to "Gerenciar categorias", categories_path, class: 'dropdown-item' %>
@@ -58,22 +45,13 @@
                 <%= link_to "Meus cupons", coupoms_path, class: 'dropdown-item' %>
                 <%= link_to "Meu perfil", edit_user_registration_path, class: 'dropdown-item' %>
                 <%= button_to "Sair", destroy_user_session_path, method: :delete, alt: "Log Out", title: "Log Out", class: 'dropdown-item' %>
-              <% else %>
-                <%= link_to "Entrar", new_user_session_path, alt: "Log In", title: "Log In", class: 'dropdown-item' %>
-              <% end %>
-            </div>
-          </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to cart_path, :class => 'cart-link' do %>
-              <%= image_tag "cart.png" %>
-              <% if current_order %>
-                <%= current_order.order_items.size > 0 ? current_order.order_items.size : "" %>
-              <% end %>
-            <% end %>
-          </li>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Entrar", new_user_session_path, class: "btn btn-success" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
