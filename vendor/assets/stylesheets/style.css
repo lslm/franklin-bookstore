@@ -15819,15 +15819,6 @@ ul {
 .nav .nav-item,
 .navbar-nav .nav-item {
   line-height: 1; }
-  .nav .nav-item.dropdown .dropdown-toggle:after,
-  .navbar-nav .nav-item.dropdown .dropdown-toggle:after {
-    border: none;
-    content: "\F140";
-    font: normal normal normal 28px/1 "Material Design Icons";
-    font-size: inherit;
-    text-rendering: auto;
-    line-height: inherit;
-    vertical-align: 0; }
   .nav .nav-item.dropdown .count-indicator,
   .navbar-nav .nav-item.dropdown .count-indicator {
     position: relative;
