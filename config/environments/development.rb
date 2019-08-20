@@ -38,9 +38,7 @@ Rails.application.configure do
     port: 587,
     domain: 'gmail.com',
     authentication: 'plain',
-    enable_starttle_auto: true,
-    user_name: Rails.configuration.default['ECOMMERCE_GMAIL_USERNAME'],
-    password: Rails.configuration.default['ECOMMERCE_GMAIL_PASSWORD']
+    enable_starttle_auto: true
   }
 
   config.action_mailer.perform_caching = false

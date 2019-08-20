@@ -7,15 +7,16 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'coffee-rails', '~> 4.2'
+gem 'rails', '~> 6.0.0'
+
 gem 'feature'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg'
 gem 'puma', '~> 3.0'
-gem 'rails', '~> 5.2.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem "webpacker"
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'client_side_validations'
