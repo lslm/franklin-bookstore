@@ -329,7 +329,6 @@ DEPENDENCIES
   rspec-rails (~> 3.6)
   rubocop (~> 0.73.0)
   shoulda-matchers (~> 3.1)
-  simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
