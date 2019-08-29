@@ -5,7 +5,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, omniauth_providers: [:facebook]
 
   has_many :products
   has_many :categories
