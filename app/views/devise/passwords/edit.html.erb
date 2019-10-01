@@ -1,19 +1,29 @@
 <div class="center">
-  <h2>Change your password</h2>
+  <h2>Atualizar senha</h2>
 
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-    <%= f.error_notification %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
 
-    <%= f.input :reset_password_token, as: :hidden %>
-    <%= f.full_error :reset_password_token %>
+    <% if resource.errors.any? %>
+      <div class='alert alert-danger' role='alert'>
+        <% resource.errors.full_messages.each do |error| %>
+          <%= error %>
+        <% end %>
+      </div>
+    <% end %>
 
-    <div class="form-inputs">
-      <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
+    <div class='form-group'>
+      <%= f.label :password, 'Senha' %>
+      <%= f.password_field :password, class: 'form-control', required: true, autofocus: true %>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Change my password" %>
+    <div class='form-group'>
+      <%= f.label :password_confirmation, 'Confirmação de senha', required: true %>
+      <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= f.submit 'Criar nova senha', class: 'btn btn-primary' %>
     </div>
   <% end %>
 
