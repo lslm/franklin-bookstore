@@ -84,7 +84,7 @@ GEM
     builder (3.2.3)
     byebug (11.0.1)
     coderay (1.1.2)
-    concurrent-ruby (1.1.5)
+    concurrent-ruby (1.1.10)
     crass (1.0.5)
     database_cleaner (1.7.0)
     devise (4.7.1)
@@ -105,9 +105,9 @@ GEM
       i18n (>= 0.8)
     feature (1.4.0)
     ffi (1.11.1)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
-    i18n (1.7.0)
+    globalid (1.0.1)
+      activesupport (>= 5.0)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.3)
     jbuilder (2.9.1)
@@ -133,7 +133,7 @@ GEM
       rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
-    minitest (5.12.2)
+    minitest (5.17.0)
     nio4r (2.4.0)
     nokogiri (1.11.2)
       mini_portile2 (~> 2.5.0)
@@ -243,7 +243,7 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
@@ -262,7 +262,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.2.0)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
